@@ -6,15 +6,17 @@ using Microsoft.Scripting.Hosting;
 using System.Collections;
 using Gwit.Core.SyntaxHighlighting;
 using System.IO;
+using System.Reflection;
+using ScriptUtils = Microsoft.Scripting.Utils;
 
 namespace Gwit.SyntaxHighlighting.Pygments
 {
 
     public class PygmentsHighlightingService : IHighlightingService
     {
-        internal static System.Reflection.Assembly Assembly
+        internal static Assembly Assembly
         {
-            get { return System.Reflection.Assembly.GetExecutingAssembly(); }
+            get { return Assembly.GetExecutingAssembly(); }
         }
 
         internal static Version AssemblyVersion
@@ -25,29 +27,27 @@ namespace Gwit.SyntaxHighlighting.Pygments
         static ScriptEngine _engine;
         static ScriptSource _source;
 
-        ScriptScope _scope;
-        Thread _init_thread;
+        static ScriptScope _scope;
 
         private void InitializeHosting()
         {
             _engine = IronPython.Hosting.Python.CreateEngine();
 
-            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+            Assembly asm = Assembly.GetExecutingAssembly();
             var stream = asm.GetManifestResourceStream("Gwit.SyntaxHighlighting.Pygments.PygmentsCodeSource.py");
             _source = _engine.CreateScriptSource(new BasicStreamContentProvider(stream), "PygmentsCodeSource.py");
+            _scope = _engine.CreateScope();
+
+            _source.Execute(_scope);
+
         }
 
         public PygmentsHighlightingService()
         {
             if (_engine == null)
                 InitializeHosting();
-
-            _scope = _engine.CreateScope();
-
-            _init_thread = new Thread(() => { _source.Execute(_scope); });
-            _init_thread.Start();
         }
-
+         
         string[] _styles;
         PygmentLanguage[] _lanugages;
 
@@ -57,8 +57,6 @@ namespace Gwit.SyntaxHighlighting.Pygments
             {
                 if (_lanugages == null)
                 {
-
-                    _init_thread.Join();
 
                     var f = _scope.GetVariable<PythonFunction>("get_all_lexers");
                     var r = (IEnumerator)(PythonGenerator)_engine.Operations.Invoke(f);
@@ -86,8 +84,6 @@ namespace Gwit.SyntaxHighlighting.Pygments
                 if (_styles == null)
                 {
 
-                    _init_thread.Join();
-
                     var f = _scope.GetVariable<PythonFunction>("get_all_styles");
                     var r = (IEnumerator)(PythonGenerator)_engine.Operations.Invoke(f);
                     var styles_list = new List<string>();
@@ -104,20 +100,15 @@ namespace Gwit.SyntaxHighlighting.Pygments
             }
         }
 
-        Microsoft.Scripting.Utils.Func<object, object, object, string> _generatehtml_function;
-        private string _lexerName;
-        private string _options;
-
-        Microsoft.Scripting.Utils.Func<object, object, object, string> _generate_html_for_file;
+        ScriptUtils.Func<object, object, object, string> _generate_html_for_file;
 
         public string GenerateHtml(string data, string fileName, object options)
         {
-            if (_generatehtml_function == null)
+            if (_generate_html_for_file == null)
             {
-                _init_thread.Join();
 
                 var f = _scope.GetVariable<PythonFunction>("generate_html_for_file");
-                _generate_html_for_file = _engine.Operations.ConvertTo<Microsoft.Scripting.Utils.Func<object, object, object, string>>(f);
+                _generate_html_for_file = _engine.Operations.ConvertTo<ScriptUtils.Func<object, object, object, string>>(f);
             }
 
             return _generate_html_for_file(data, fileName, null);
