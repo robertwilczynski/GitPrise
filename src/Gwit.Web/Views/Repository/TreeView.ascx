@@ -40,7 +40,7 @@
                     <% }%>
                 </td>
                 <td>
-                    <a href="<%= Html.GitUrl(item.Type == ListItemViewModel.ItemType.Tree ? "tree" : "blob", Model.CommitId,item.Path) %>">
+                    <a href="<%= Html.GitUrl(item.Type == ListItemViewModel.ItemType.Tree ? "tree" : "blob", null, item.Path) %>">
                         <%: item.Name %>
                     </a>
                 </td>

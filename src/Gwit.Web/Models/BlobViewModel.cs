@@ -6,8 +6,6 @@ namespace Gwit.Web.Models
 {
     public class BlobViewModel : RepositoryNavigationViewModelBase
     {
-        private Commit _commit;
-
         public string Path { get; private set; }
         
         public PathViewModel PathModel { get; private set; }
@@ -16,10 +14,9 @@ namespace Gwit.Web.Models
         
         public string FormattedData { get; set; }
 
-        public BlobViewModel(Repository repository, string repositoryName, Commit commit, Leaf blob, PathViewModel pathModel)
-            : base(repository, repositoryName, commit.Hash)
+        public BlobViewModel(Repository repository, string repositoryName, string treeish, Leaf blob, PathViewModel pathModel)
+            : base(repository, repositoryName, treeish)
         {
-            _commit = commit;
             Blob = blob;
             Path = blob.Path;
             PathModel = pathModel;

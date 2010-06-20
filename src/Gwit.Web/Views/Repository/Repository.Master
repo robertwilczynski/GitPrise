@@ -14,10 +14,8 @@
             <ul class="subnav" style="display: none;">
                 <% foreach (var item in Model.Branches)
                    {%>
-                <li>
-                <a href="<%: Html.TreeUrl(item) %>"><%: item %></a>
-                    
-                </li>
+                <li><a href="<%: Html.TreeUrl(item) %>">
+                    <%: item %></a> </li>
                 <% }%>
             </ul>
             <span class=""></span></li>
@@ -25,9 +23,8 @@
             <ul class="subnav" style="display: none;">
                 <% foreach (var item in Model.Tags)
                    {%>
-                <li>
-                    <%= Html.ActionLink(item, "tree", new{ repositoryName = Model.RepositoryName, id = item}) %>
-                </li>
+                <li><a href="<%: Html.TreeUrl(item) %>">
+                    <%: item %></a> </li>
                 <% }%>
             </ul>
             <span class=""></span></li>

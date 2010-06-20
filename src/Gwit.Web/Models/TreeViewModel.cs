@@ -13,13 +13,8 @@ namespace Gwit.Web.Models
         public List<ListItemViewModel> Items { get; set; }
         public PathViewModel PathModel { get; set; }
 
-        public TreeViewModel(Repository repository, string repositoryName, Commit commit, PathViewModel pathModel)
-            : this(repository, repositoryName, commit, commit.Tree, pathModel)
-        {
-        }
-
-        public TreeViewModel(Repository repository, string repositoryName, Commit commit, Tree tree, PathViewModel pathModel)
-            : base(repository, repositoryName, commit.Hash)
+        public TreeViewModel(Repository repository, string repositoryName, Tree tree, PathViewModel pathModel)
+            : base(repository, repositoryName, tree.Hash)
         {
             PathModel = pathModel;
             Tree = tree;
@@ -46,8 +41,8 @@ namespace Gwit.Web.Models
                 {
                     Name = node.Name,
                     Author = lastCommit != null ? lastCommit.Author.Name : String.Empty,
-                    AuthorDate = lastCommit != null ? lastCommit.AuthorDate : DateTimeOffset.MinValue,
-                    CommitDate = lastCommit != null ? lastCommit.CommitDate : DateTimeOffset.MinValue,
+                    AuthorDate = lastCommit != null ? lastCommit.AuthorDate : (DateTimeOffset?)null,
+                    CommitDate = lastCommit != null ? lastCommit.CommitDate : (DateTimeOffset?)null,
                     Message = lastCommit != null ? lastCommit.Message : String.Empty,
                     Type = type,
                     Path = node.Path,

@@ -46,7 +46,11 @@ namespace Gwit.Web.Controllers
             }
 
             controller.Repository = RepositoryResolver.GetRepository(controller.RepositoryLocation);
+            
             controller.Treeish = (string)filterContext.RouteData.Values["id"];
+            controller.Treeish = controller.Treeish ?? "master";
+            filterContext.RequestContext.RouteData.DataTokens.Add("Treeish", controller.Treeish);
+
             controller.Path = (string)filterContext.RouteData.Values["path"];
         }
 
@@ -93,18 +97,21 @@ namespace Gwit.Web.Controllers
             _settings = _configurationProvider.Load();
         }
 
-        
+
         public ActionResult Details(string repositoryName)
         {
-            var commit = Repository.Head.CurrentCommit;
+            var head = Repository.Head;
+            
+            var commit = head.Target as Commit;
+            var tree = commit.Tree;
             var viewModel = new RepositoryDetailsViewModel(Repository,
                 repositoryName,
-                commit,
+                head.CurrentCommit,
                 new TreeViewModel(
                     Repository,
                     repositoryName,
-                    Repository.Head.CurrentCommit,
-                    new PathViewModel(Repository, Request.RequestContext, repositoryName, commit.Hash, commit.Tree)
+                    tree,
+                    new PathViewModel(Request.RequestContext, tree)
                 )
             );
             return View(viewModel);
@@ -114,8 +121,25 @@ namespace Gwit.Web.Controllers
         {
             try
             {
-                var commit = Repository.Get<Commit>(id);
-                var node = commit.Tree.Node(path);
+                //var commit = Repository.Get<Commit>(id);
+                //var node = commit.Tree.Node(path);
+
+                //if (node == null)
+                //{
+                //    throw new InvalidOperationException("Invalid path");
+                //}
+
+                AbstractTreeNode node = null;
+
+                var obj = Repository.Get<AbstractObject>(id);
+                if (obj is Commit)
+                {
+                    node = (obj as Commit).Tree.Node(path);
+                }
+                else if (obj is Tree)
+                {
+                    node = (obj as Tree).Node(path);
+                }
 
                 if (node == null)
                 {
@@ -129,8 +153,8 @@ namespace Gwit.Web.Controllers
                 }
 
                 var viewModel = new BlobViewModel(
-                    Repository, repositoryName, commit, blob,
-                    new PathViewModel(Repository, this.Request.RequestContext, repositoryName, id, blob))
+                    Repository, repositoryName, node.Hash, blob,
+                    new PathViewModel(Request.RequestContext, blob))
                     {
                         FormattedData = _hightlightingService.GenerateHtml(blob.Data, blob.Path, null)
                     };
@@ -147,15 +171,24 @@ namespace Gwit.Web.Controllers
         {
             try
             {
-                var commit = Repository.Get<Commit>(id);
-                var node = commit.Tree.Node(path);
+                AbstractTreeNode node = null;
+
+                var obj = Repository.Get<AbstractObject>(id);                
+                if (obj is Commit)
+                {
+                    node = (obj as Commit).Tree;
+                }
+                else if (obj is Tree)
+                {
+                    node = obj as Tree;
+                }
 
                 if (node == null)
                 {
                     throw new InvalidOperationException("Invalid path");
                 }
 
-                var tree = node as Tree;
+                var tree = (node as Tree).Node(path) as Tree;
                 if (tree == null)
                 {
                     throw new InvalidOperationException("Path is not pointing to a tree.");
@@ -163,8 +196,8 @@ namespace Gwit.Web.Controllers
 
                 var viewModel = new TreeViewModel(
                     Repository,
-                    repositoryName, commit, tree,
-                    new PathViewModel(Repository, Request.RequestContext, repositoryName, commit.Hash, tree)
+                    repositoryName, tree,
+                    new PathViewModel(Request.RequestContext, tree)
                 );
                 return View(viewModel);
 
@@ -180,11 +213,12 @@ namespace Gwit.Web.Controllers
             try
             {
                 var commit = Repository.Get<Commit>(id);
+                var tree = commit.Tree;
                 var viewModel = new RepositoryDetailsViewModel(Repository, repositoryName, commit, new TreeViewModel(
                         Repository,
                         repositoryName,
-                        commit,
-                        new PathViewModel(Repository, Request.RequestContext, repositoryName, commit.Hash, commit.Tree)
+                        tree,
+                        new PathViewModel(Request.RequestContext, commit.Tree)
                     ));
                 return View(viewModel);
             }

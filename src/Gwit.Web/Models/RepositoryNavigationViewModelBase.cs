@@ -18,11 +18,11 @@ namespace Gwit.Web.Models
             Tags = new List<string>();
         }
 
-        public RepositoryNavigationViewModelBase(Repository repository, string name, string commitId)
+        public RepositoryNavigationViewModelBase(Repository repository, string name, string treeish)
             : this()
         {            
             RepositoryName = name;
-            CommitId = commitId;
+            CommitId = treeish;
             FillFromRepository(repository);
         }
 
@@ -30,7 +30,22 @@ namespace Gwit.Web.Models
         {
             Branches.AddRange(repository.Branches.Keys);
             Tags.AddRange(repository.Tags.Keys);
-            CurrentCommit = repository.Head.CurrentCommit;
+            var obj = repository.Get<AbstractObject>(CommitId);
+
+            if (obj.IsTag)
+            {
+                obj = (obj as Tag).Target;
+            }
+
+            if (obj.IsCommit)
+            {
+                CurrentCommit = obj as Commit;
+            }
+
+            //else if (obj is AbstractTreeNode)
+            //{
+            //    CurrentCommit = (obj as AbstractTreeNode).GetLastCommit();
+            //}
         }
     }
 }

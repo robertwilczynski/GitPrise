@@ -17,8 +17,8 @@ namespace Gwit.Web.Models
 
         public string Path { get; set; }
 
-        public DateTimeOffset AuthorDate { get; set; }
-        public DateTimeOffset CommitDate { get; set; }
+        public DateTimeOffset? AuthorDate { get; set; }
+        public DateTimeOffset? CommitDate { get; set; }
 
         
 

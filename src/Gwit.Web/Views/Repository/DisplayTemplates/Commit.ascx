@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<GitSharp.Commit>" %>
 <div class="commit">
+    <%if (Model != null)
+      {%>
     <div class="main">
         <span class="message">
             <%= Model.Message %>
@@ -34,4 +36,9 @@
         parent
         <%= Model.Parent.ShortHash %>
     </div>
+    <%}
+      else
+      {%>
+      No data
+    <%} %>
 </div>

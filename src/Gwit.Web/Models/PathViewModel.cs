@@ -7,24 +7,28 @@ using System.Linq;
 
 namespace Gwit.Web.Models
 {
-    public class PathViewModel : RepositoryNavigationViewModelBase
+    public class PathViewModel
     {
         public Element Root { get; private set; }
         public IList<Element> Elements { get; private set; }
         public Element CurrentItem { get; private set; }
         public bool IsRootEqualToCurrentItem { get; private set; }
 
-        public PathViewModel(Repository repository, RequestContext context, string repositoryName, string id, AbstractTreeNode node)
-            : base(repository, repositoryName, id)
+        public PathViewModel(RequestContext context, AbstractTreeNode node)
+            : this(context, 
+                (string)context.RouteData.DataTokens["RepositoryName"], 
+                (string)context.RouteData.DataTokens["Treeish"], 
+                node)
+        {
+        }
+
+        public PathViewModel(RequestContext context, string repositoryName, string id, AbstractTreeNode node)
         {
             Elements = new List<Element>();
 
             CurrentItem = new Element(context, repositoryName, id, node);
 
-
             var parts = node.Path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            var elementParts = parts.Take(parts.Length - 1);
-
             var currentNode = node;            
 
             while (currentNode.Parent != null)
@@ -47,7 +51,7 @@ namespace Gwit.Web.Models
             public string Url { get; set; }
             public string IsNavigationElement { get; set; }
 
-            public Element(RequestContext context, string repositoryName, string id, AbstractTreeNode node)
+            public Element(RequestContext context, string repositoryName, string treeish, AbstractTreeNode node)
             {
                 var helper = new UrlHelper(context);
 
@@ -55,7 +59,7 @@ namespace Gwit.Web.Models
                 Url = helper.Action("Tree", "Repository", new
                 {
                     repositoryName = repositoryName,
-                    id = id,
+                    id = treeish,
                     path = node.Path,
                     location = context.RouteData.DataTokens["RepositoryLocation"]
                 });
