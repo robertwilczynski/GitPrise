@@ -27,18 +27,23 @@
         </div>
     </div>
     <div class="details">
-        commit
-        <%= Model.ShortHash %>
-        <br />
-        tree
-        <%= Model.Tree.ShortHash %>
-        <br />
-        parent
-        <%= Model.Parent.ShortHash %>
+        <ul>
+            <li><span class="lbl">commit</span> <a href="<%= Html.CommitUrl(Model.Hash) %>" class="sha">
+                <%= Model.ShortHash%></a> </li>
+            <li><span class="lbl">tree</span> <a href="<%= Html.TreeUrl(Model.Tree.Hash) %>"
+                class="sha">
+                <%= Model.Tree.ShortHash %></a> </li>
+            <% foreach (var parent in Model.Parents)
+               { %>
+            <li><span class="lbl">parent</span> <a href="<%= Html.CommitUrl(parent.Hash) %>"
+                class="sha">
+                <%= parent.ShortHash%></a> </li>
+            <% } %>
+        </ul>
     </div>
     <%}
       else
       {%>
-      No data
+    No data
     <%} %>
 </div>

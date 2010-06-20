@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Linq;
+using Gwit.Core.Web.Mvc;
 
 namespace Gwit.Web.Models
 {
@@ -15,9 +16,9 @@ namespace Gwit.Web.Models
         public bool IsRootEqualToCurrentItem { get; private set; }
 
         public PathViewModel(RequestContext context, AbstractTreeNode node)
-            : this(context, 
-                (string)context.RouteData.DataTokens["RepositoryName"], 
-                (string)context.RouteData.DataTokens["Treeish"], 
+            : this(context,
+                context.GetRepositoryName(),
+                context.GetTreeish(),
                 node)
         {
         }
@@ -29,7 +30,7 @@ namespace Gwit.Web.Models
             CurrentItem = new Element(context, repositoryName, id, node);
 
             var parts = node.Path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            var currentNode = node;            
+            var currentNode = node;
 
             while (currentNode.Parent != null)
             {
@@ -61,7 +62,7 @@ namespace Gwit.Web.Models
                     repositoryName = repositoryName,
                     id = treeish,
                     path = node.Path,
-                    location = context.RouteData.DataTokens["RepositoryLocation"]
+                    location = context.GetRepositoryLocation(),
                 });
             }
         }

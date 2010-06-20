@@ -14,6 +14,12 @@ namespace Gwit.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "About",
+                "about",
+                new { controller = "Home", action = "About" }
+            );
+
+            routes.MapRoute(
                 "RepositoryShort", // Route name
                 "{repositoryName}", // URL with parameters
                 new { controller = "Repository", action = "Details"} // Parameter defaults

@@ -69,6 +69,7 @@
     <Compile Include="System\StringExtensions.cs" />
     <Compile Include="Web\Mvc\InjectingActionInvoker.cs" />
     <Compile Include="Web\Mvc\HtmlExtensions.cs" />
+    <Compile Include="Web\Mvc\RequestContextExtensionss.cs" />
     <Compile Include="Web\Mvc\UnityControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Mvc\UrlExtensions.cs" />

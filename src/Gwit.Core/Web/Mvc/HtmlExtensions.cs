@@ -54,6 +54,11 @@ namespace Gwit.Core.Web.Mvc
             return GitUrl(helper, "tree", treeish, path);
         }
 
+        public static string CommitUrl(this HtmlHelper helper, string treeish)
+        {
+            return GitUrl(helper, "commit", treeish, null);
+        }
+
         public static string TreeUrl(this HtmlHelper helper, string treeish)
         {
             string path = String.Empty;

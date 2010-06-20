@@ -2,7 +2,9 @@
     MasterPageFile="~/Views/Shared/Site.Master" %>
 
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+    <%: Model.Title %>
     <asp:ContentPlaceHolder ID="TitleContent" runat="server">
+        
     </asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">

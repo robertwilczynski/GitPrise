@@ -11,6 +11,20 @@ namespace Gwit.Web.Models
         public Commit CurrentCommit { get; set; }
         public List<string> Branches { get; set; }
         public List<string> Tags { get; set; }
+        public string Path { get; set; }
+        public PathViewModel PathModel { get; protected set; }
+
+        virtual public string Title
+        {
+            get 
+            {
+                if (!String.IsNullOrEmpty(Path))
+                {
+                    return "{0} at {1} from {2}".Fill(Path, CommitId, RepositoryName); 
+                } 
+                return "{0} at {1}".Fill(RepositoryName, CommitId); 
+            }
+        }
 
         private RepositoryNavigationViewModelBase()
         {
@@ -20,7 +34,7 @@ namespace Gwit.Web.Models
 
         public RepositoryNavigationViewModelBase(Repository repository, string name, string treeish)
             : this()
-        {            
+        {
             RepositoryName = name;
             CommitId = treeish;
             FillFromRepository(repository);

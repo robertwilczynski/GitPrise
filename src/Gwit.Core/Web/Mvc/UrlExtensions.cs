@@ -24,6 +24,11 @@ namespace Gwit.Core.Web.Mvc
             return builder.ToString(TagRenderMode.SelfClosing);
         }
 
+        public static string Image(this UrlHelper helper, string fileName)
+        {
+            return helper.Content(String.Format("~/Content/images/{0}", fileName));
+        }
+
         public static string LogOn(this UrlHelper helper)
         {
             return helper.Content(helper.Action("LogOn", "Account"));

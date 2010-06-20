@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using GitSharp;
+using System.Web.Routing;
+using Gwit.Core.Web.Mvc;
 
 namespace Gwit.Web.Models
 {
@@ -8,13 +10,21 @@ namespace Gwit.Web.Models
     public class TreeViewModel : RepositoryNavigationViewModelBase
     {
         public bool IsRoot { get; set; }
-        public string Path { get; set; }
         public Tree Tree { get; set; }
         public List<ListItemViewModel> Items { get; set; }
-        public PathViewModel PathModel { get; set; }
 
-        public TreeViewModel(Repository repository, string repositoryName, Tree tree, PathViewModel pathModel)
-            : base(repository, repositoryName, tree.Hash)
+        public TreeViewModel(Repository repository, RequestContext context, Tree tree)
+            : this(repository,
+                context.GetRepositoryName(),
+                context.GetTreeish(),
+                tree,
+                new PathViewModel(context, tree))
+        {
+
+        }
+
+        public TreeViewModel(Repository repository, string repositoryName, string treeish, Tree tree, PathViewModel pathModel)
+            : base(repository, repositoryName, treeish)
         {
             PathModel = pathModel;
             Tree = tree;
