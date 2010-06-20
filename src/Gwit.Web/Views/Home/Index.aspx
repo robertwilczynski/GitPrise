@@ -1,12 +1,30 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Gwit.Web.Models.RepositoriesViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Home Page
+    Index
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: ViewData["Message"] %></h2>
+    <h2>
+        Index</h2>
+    <% foreach (var item in Model.List)
+       { %>
+    <ul class="repo">
+        <li class="name">
+            <a href="<%= Url.Action("Details", "Repository", new { repositoryName = item.Name }) %>">
+                <%: item.Name %></a>
+        </li>
+        <li class="desc">
+            <%: item.Description %></li>
+        <li class="stats">
+            <%: item.Description %></li>
+    </ul>
+    <% } %>
     <p>
-        To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+        <%: Html.ActionLink("Create New", "Create") %>
     </p>
+    <script type="text/javascript">
+        $(function () {
+            $(".repo").corner(10);
+        });
+    </script>
 </asp:Content>

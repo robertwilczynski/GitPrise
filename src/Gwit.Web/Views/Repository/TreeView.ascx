@@ -24,9 +24,11 @@
                 </td>
             </tr>
             <% } %>
-            <% foreach (var item in Model.Items)
-               { %>
-            <tr>
+            <% for (int index = 0; index < Model.Items.Count; index++)                   
+               {
+                   var item = Model.Items[index];
+                   %>
+            <tr <%= (index % 2 == 0) ? @"class=""alt""" : String.Empty %>>
                 <td class="ico">
                     <% if (item.Type == ListItemViewModel.ItemType.Tree)
                        { %>
@@ -38,12 +40,12 @@
                     <% }%>
                 </td>
                 <td>
-                    <a href="<%= Url.Action(item.Type == ListItemViewModel.ItemType.Tree ? "tree" : "blob", "Repository", new{ repositoryName = Model.RepositoryName, id = Model.CommitId, path = item.Path }) %>">
+                    <a href="<%= Html.GitUrl(item.Type == ListItemViewModel.ItemType.Tree ? "tree" : "blob", Model.CommitId,item.Path) %>">
                         <%: item.Name %>
                     </a>
                 </td>
                 <td>
-                    <%= Html.DateTime(item.CommitDate) %>
+                    <%: Html.DateTime(item.CommitDate) %>
                 </td>
                 <td>
                     <%: item.Message %>

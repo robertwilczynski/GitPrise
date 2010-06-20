@@ -15,7 +15,8 @@
                 <% foreach (var item in Model.Branches)
                    {%>
                 <li>
-                    <%= Html.ActionLink(item, "tree", new{ repositoryName = Model.RepositoryName, id = item}) %>
+                <a href="<%: Html.TreeUrl(item) %>"><%: item %></a>
+                    
                 </li>
                 <% }%>
             </ul>
@@ -31,8 +32,6 @@
             </ul>
             <span class=""></span></li>
     </ul>
-    <%= Html.DropDownList("branches", Model.Branches.Select(x => new SelectListItem { Text = x, Value = x})) %>
-    <%= Html.DropDownList("tags", Model.Tags.Select(x => new SelectListItem { Text = x, Value = x})) %>
     <%= Html.DisplayFor(m => m.CurrentCommit) %>
     <asp:ContentPlaceHolder ID="MainContent" runat="server">
     </asp:ContentPlaceHolder>

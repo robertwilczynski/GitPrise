@@ -13,17 +13,38 @@ namespace Gwit.Core.Services
             _settingsProvider = settingsProvider;
         }
 
-        public string GetPath(string name)
+        private string GetPath(string name, bool bare)
         {
             var settings = _settingsProvider.Load();
-            var path = Path.Combine(settings.RepositoryRootPath, name.Git());
+            var path = Path.Combine(settings.RepositoryRootPath, bare ? name.Git() : name);
             return path;
         }
 
         public Repository GetRepository(string name)
         {
-            var path = GetPath(name);
-            return new Repository(path);
+            var path = String.Empty;
+            if (Path.IsPathRooted(name))
+            {
+                path = name;
+                if (Directory.Exists(path))
+                {
+                    return new Repository(path);
+                }
+            }
+
+            path = GetPath(name, true);
+            if (Directory.Exists(path))
+            {
+                return new Repository(path);
+            }
+
+            path = GetPath(name, false);
+            if (Directory.Exists(path))
+            {
+                return new Repository(path);
+            }
+
+            throw new InvalidOperationException("Directory for repository '{0}' not found.".Fill(name));                        
         }
     }
 }

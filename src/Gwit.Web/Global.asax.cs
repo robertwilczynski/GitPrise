@@ -28,13 +28,14 @@ namespace Gwit.Web
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Repository", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
         }
 
         protected void Application_Start()
         {
             ControllerBuilder.Current.SetControllerFactory(new UnityControllerFactory(IoCRegistry.Container));
+            
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);

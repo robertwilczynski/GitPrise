@@ -26,28 +26,6 @@ namespace Gwit.Web.Models
             var elementParts = parts.Take(parts.Length - 1);
 
             var currentNode = node;            
-            //for (int i = elementParts.Length - 1; i >= 0; i--)
-            //{
-            //    var part = parts[i];
-            //    currentNode.pa
-            //    if (part is Leaf)
-            //}
-
-            //var treeParts = parts.Take(parts.Length - 1);
-            //var blobName = parts.Last();
-            //foreach (string part in treeParts)
-            //{
-            //    var trees = tree.Trees.ToList();
-            //    tree = trees.First(x => x.Name == part);
-            //}
-            //var blob = tree.Leaves.First(x => x.Name == blobName);
-
-            //var viewModel = new BlobViewModel(repositoryName, commit, blob, 
-            //    new PathViewModel(this.Request.RequestContext, repositoryName, id, blob))
-            //    {
-            //        FormattedData = _hightlightingService.GenerateHtml(blob.Data, blob.Path, null)
-            //    };
-            //return View(viewModel);
 
             while (currentNode.Parent != null)
             {
@@ -78,7 +56,8 @@ namespace Gwit.Web.Models
                 {
                     repositoryName = repositoryName,
                     id = id,
-                    path = node.Path
+                    path = node.Path,
+                    location = context.RouteData.DataTokens["RepositoryLocation"]
                 });
             }
         }

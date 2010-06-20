@@ -65,6 +65,9 @@
     <Compile Include="Services\RepositoryResolver.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="SyntaxHighlighting\IHighlightingService.cs" />
+    <Compile Include="System\CollectionExtensions.cs" />
+    <Compile Include="System\StringExtensions.cs" />
+    <Compile Include="Web\Mvc\InjectingActionInvoker.cs" />
     <Compile Include="Web\Mvc\HtmlExtensions.cs" />
     <Compile Include="Web\Mvc\UnityControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,35 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GitSharp.Core;
 
 namespace GitSharp
 {
     public static class GitSharpExtensions
     {
-
-        /// <summary>
-        /// Find the commit this file or tree was last changed in
-        /// </summary>
-        public static Commit GetLastChangingCommit(this AbstractTreeNode node, Commit commit)
+        public static AbstractTreeNode Node(this Tree tree, string path)
         {
-            if (commit == null)
-                return null;
-            foreach (var c in new[] { commit }.Concat(commit.Ancestors))
+            if (String.IsNullOrEmpty(path))
             {
-                foreach (var change in c.Changes)
-                {
-                    if (change.Path == node.Name) // Todo: here, renaming of this file should be detected and tracked
-                    {
-                        return c;
-                    }                    
-                    // TODO: optimize to not search any further if we find the point of creation of this file
-                }
+                return tree;
             }
-            return null;
-        }
 
+            var parts = path.Split('/');
+            AbstractTreeNode node = tree;
+            foreach (string part in parts)
+            {
+
+                node = (node as Tree).Children.FirstOrDefault(x => ((AbstractTreeNode)x).Name == part) as AbstractTreeNode;
+            }
+            return node;
+        }
     }
 
 }

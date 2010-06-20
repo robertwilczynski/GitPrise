@@ -17,7 +17,9 @@ namespace Gwit.Core.Web.Mvc
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return (IController)_container.Resolve(controllerType);
+            var controller = (Controller)_container.Resolve(controllerType);
+            controller.ActionInvoker = new InjectingActionInvoker(_container);
+            return controller;
         }
     }
 }
