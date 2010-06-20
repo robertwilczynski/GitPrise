@@ -1,0 +1,549 @@
+﻿body
+{
+	background: none repeat scroll 0 0 #2D2D2D;
+	color: #4E4E4E;
+	font-family: "Helvetica Neue" ,Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	line-height: 1.461em;
+	margin: 0;
+	padding: 0 0 20px;
+}
+
+#page
+{
+	margin: 45px auto;
+	width: 960px;
+}
+
+#main
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+	float: left;
+	min-height: 400px;
+	width: 960px;
+}
+
+#content
+{
+	float: left;
+	padding: 20px 20px;
+}
+
+a:link
+{
+	color: #034af3;
+	text-decoration: underline;
+}
+a:visited
+{
+	color: #505abc;
+}
+a:hover
+{
+	color: #1d60ff;
+	text-decoration: none;
+}
+a:active
+{
+	color: #12eb87;
+}
+
+p, ul
+{
+	margin-bottom: 20px;
+	line-height: 1.6em;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+	font-size: 1.5em;
+	color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+	font-size: 2em;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+h2
+{
+	padding: 0 0 10px 0;
+}
+h3
+{
+	font-size: 1.2em;
+}
+h4
+{
+	font-size: 1.1em;
+}
+h5, h6
+{
+	font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+	margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+#header
+{
+	position: relative;
+	margin-bottom: 0px;
+	color: #000;
+	padding: 0;
+}
+
+#header h1
+{
+	font-weight: bold;
+	padding: 5px 0;
+	margin: 0;
+	color: #fff;
+	border: none;
+	line-height: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 32px !important;
+}
+
+#footer
+{
+	color: #999;
+	padding: 10px 0;
+	text-align: center;
+	line-height: normal;
+	margin: 0;
+	font-size: .9em;
+}
+
+/* TAB MENU   
+----------------------------------------------------------*/
+ul#menu
+{
+	border-bottom: 1px #5C87B2 solid;
+	padding: 0 0 2px;
+	position: relative;
+	margin: 0;
+	text-align: right;
+}
+
+ul#menu li
+{
+	display: inline;
+	list-style: none;
+}
+
+ul#menu li#greeting
+{
+	padding: 10px 20px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	color: #fff;
+}
+
+ul#menu li a
+{
+	padding: 10px 20px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	background-color: #e8eef4;
+	color: #034af3;
+}
+
+ul#menu li a:hover
+{
+	background-color: #fff;
+	text-decoration: none;
+}
+
+ul#menu li a:active
+{
+	background-color: #a6e2a6;
+	text-decoration: none;
+}
+
+ul#menu li.selected a
+{
+	background-color: #fff;
+	color: #000;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+	margin: 1em 0;
+	padding: 1em;
+	border: 1px solid #CCC;
+}
+
+fieldset p
+{
+	margin: 2px 12px 10px 10px;
+}
+
+legend
+{
+	font-size: 1.1em;
+	font-weight: 600;
+	padding: 2px 4px 8px 4px;
+}
+
+input[type="text"]
+{
+	width: 200px;
+	border: 1px solid #CCC;
+}
+
+input[type="password"]
+{
+	width: 200px;
+	border: 1px solid #CCC;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table
+{
+	border: solid 1px #e8eef4;
+	border-collapse: collapse;
+}
+
+table td
+{
+	padding: 5px;
+	border: solid 1px #e8eef4;
+}
+
+table th
+{
+	padding: 6px 5px;
+	text-align: left;
+	background-color: #e8eef4;
+	border: solid 1px #e8eef4;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+	clear: both;
+}
+
+.error
+{
+	color: Red;
+}
+
+#menucontainer
+{
+	margin-top: 40px;
+}
+
+div#title
+{
+	display: block;
+	float: left;
+	text-align: left;
+}
+
+#logindisplay
+{
+	font-size: 1.1em;
+	display: block;
+	text-align: right;
+	margin: 10px;
+	color: White;
+}
+
+#logindisplay a:link
+{
+	color: white;
+	text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+	color: white;
+	text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+	color: white;
+	text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+	color: #ff0000;
+}
+
+.field-validation-valid
+{
+	display: none;
+}
+
+.input-validation-error
+{
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.validation-summary-valid
+{
+	display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label, .editor-label, .display-field, .editor-field
+{
+	margin: 0.5em 0;
+}
+
+.text-box
+{
+	width: 30em;
+}
+
+.text-box.multi-line
+{
+	height: 6.5em;
+}
+
+.tri-state
+{
+	width: 6em;
+}
+
+/* 
+----------------------------------------------------------*/
+div.commit
+{
+	border: 1px solid #ddd;
+	background-color: #efefef;
+	padding: 5px;
+	overflow: hidden;
+}
+
+div.commit div.main
+{
+	float: left;
+}
+
+div.commit div.details
+{
+	float: right;
+}
+
+/* repos list
+----------------------------------------------------------*/
+ul.repo
+{
+	border: solid 1px #cacaca;
+	padding: 5px;
+}
+
+ul.repo li
+{
+	list-style-type: none;
+}
+
+li.repo > .name
+{
+	background-image: url('images/bc_bg.png');
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: solid 1px #cacaca;
+	float: left;
+}
+
+li.repo > .desc
+{
+}
+
+li.repo > .stats
+{
+	background-color: #ff0000;
+}
+/* repo browser
+----------------------------------------------------------*/
+table.repo
+{
+	width: 100%;
+}
+
+table.repo td.ico
+{
+	width: 20px;
+}
+
+div.filewrapper
+{
+	position: relative;
+	width: 920px;
+}
+
+div.file
+{
+	overflow: auto;
+	border-left: 1px solid #cacaca;
+	border-right: 1px solid #cacaca;
+	border-bottom: 1px solid #cacaca;
+	width: 920px;
+}
+
+ul.breadcrumb
+{
+	font: 11px Arial, Helvetica, sans-serif;
+	background-image: url('images/bc_bg.png');
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+	color: #9b9b9b;
+	border: solid 1px #cacaca;
+	width: 100%;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.breadcrumb li
+{
+	list-style-type: none;
+	float: left;
+	padding-left: 10px;
+}
+
+ul.breadcrumb a
+{
+	height: 30px;
+	display: block;
+	background-image: url('images/bc_separator.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-right: 15px;
+	text-decoration: none;
+	color: #454545;
+}
+
+.home
+{
+	border: none;
+	margin: 8px 0px;
+}
+
+ul.breadcrumb a:hover
+{
+	color: #000;
+}
+
+/* nav
+*/
+ul.topnav
+{
+	list-style: none;
+	float: left;
+	font: 11px Arial, Helvetica, sans-serif;
+	background-image: url('images/bc_bg.png');
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+	color: #9b9b9b;
+	border: solid 1px #cacaca;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+ul.topnav li
+{
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative; /*--Declare X and Y axis base--*/
+}
+ul.topnav li a
+{
+	padding: 0px 5px;
+	color: #000;
+	display: block;
+	text-decoration: none;
+	float: left;
+}
+ul.topnav li a:hover
+{
+	/*background: url(topnav_hover.gif) no-repeat center top;*/
+}
+ul.topnav li span
+{
+	/*--Drop down trigger styles--*/
+	width: 17px;
+	height: 35px;
+	float: left; /*background: url(subnav_btn.gif) no-repeat center top;*/
+}
+ul.topnav li span.subhover
+{
+	background-position: center bottom;
+	cursor: pointer;
+}
+/*--Hover effect for trigger--*/
+ul.topnav li ul.subnav
+{
+	list-style: none;
+	position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+	left: 0;
+	top: 35px;
+	background: #eee;
+	margin: 0;
+	padding: 0;
+	display: none;
+	float: left;
+	min-width: 150px;
+	border: 1px solid #111;
+	
+	max-height: 200px;
+	overflow: auto;
+	z-index: 999;
+}
+ul.topnav li ul.subnav li
+{
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid #252525; /*--Create bevel effect--*/
+	clear: both;
+	width: 100%;
+}
+html ul.topnav li ul.subnav li a
+{
+	float: left;
+	padding-left: 20px;
+	width: auto;
+}
+html ul.topnav li ul.subnav li a:hover
+{
+	/*--Hover effect for subnav links--*/ /*background: #222 url(dropdown_linkbg.gif) no-repeat 10px center; */
+}
