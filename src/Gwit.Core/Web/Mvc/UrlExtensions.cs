@@ -1,11 +1,14 @@
 using System;
 using System.Web.Mvc;
 using GitSharp;
+using Gwit.Core.Web.Utils;
+using Gwit.Core.Web.Utils.Gravatar;
 
 namespace Gwit.Core.Web.Mvc
 {
     public static class UrlExtensions
     {
+        
         public static string Script(this UrlHelper helper, string fileName)
         {
             TagBuilder builder = new TagBuilder("script");
@@ -38,6 +41,7 @@ namespace Gwit.Core.Web.Mvc
         {
             return helper.Content(helper.Action("GetServerStatus", "Home"));
         }
+
 
     }
 

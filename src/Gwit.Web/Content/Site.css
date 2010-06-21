@@ -349,3 +349,8 @@ img
 {
 	border-width: 0px;
 }
+
+img.gravatar
+{
+	border: 2px solid #fff;
+}

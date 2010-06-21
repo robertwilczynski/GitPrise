@@ -7,21 +7,24 @@
             <%= Model.Message %>
         </span>
         <div>
-            <div>
+            <div class="person">
+                <img src="<%= Url.Gravatar(Model.Author.EmailAddress) %>" alt="<%: Model.Author.Name %>" class="gravatar" />
                 <span class="label">
-                    <%= Model.Author.Name %></span> <span class="label">(author)</span>
+                    <%: Model.Author.Name %></span> <span class="label">(author)</span>
+                <div>
+                    <%= Html.DateTime(Model.AuthorDate)%>
+                </div>
             </div>
-            <div>
-                <%= Html.DateTime(Model.AuthorDate)%>
-            </div>
+
             <% if (Model.Committer.Name != Model.Author.Name)
                { %>
-            <div>
+            <div class="person">            
+                <img src="<%= Url.Gravatar(Model.Committer.EmailAddress) %>" alt="<%: Model.Committer.Name %>" class="gravatar" />
                 <span class="label">
-                    <%= Model.Committer.Name%></span> <span class="label">(committer)</span>
-            </div>
-            <div>
-                <%= Html.DateTime(Model.CommitDate)%>
+                    <%: Model.Committer.Name%></span> <span class="label">(committer)</span>
+                <div>
+                    <%= Html.DateTime(Model.CommitDate)%>
+                </div>
             </div>
             <% } %>
         </div>

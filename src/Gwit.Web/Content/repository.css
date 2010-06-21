@@ -13,6 +13,19 @@ div.commit div.main
 	float: left;
 }
 
+div.commit div.main img
+{
+	display:inline;
+	float:left;
+	margin-right: 5px;
+}
+
+div.commit div.main div.person
+{
+	clear:both;
+	margin-top: 10px;
+}
+
 div.commit div.details
 {
 	float: right;
@@ -245,4 +258,33 @@ html ul.topnav li ul.subnav li a
 html ul.topnav li ul.subnav li a:hover
 {
 	/*--Hover effect for subnav links--*/ /*background: #222 url(dropdown_linkbg.gif) no-repeat 10px center; */
+}
+
+.tabs ul li a {
+border-color:#A9A9A9 #A9A9A9 #A9A9A9 -moz-use-text-color;
+border-style:solid solid solid none;
+border-width:1px 1px 1px medium;
+color:#656565;
+display:block;
+float:left;
+font-size:11px;
+line-height:21px;
+padding:0 10px;
+text-decoration:none;
+}
+
+.tabs ul li a.current {
+border-bottom:1px solid #2B2B2B;
+border-top:1px solid #2B2B2B;
+color:#FFFFFF;
+}
+
+.tabs ul li:first-child a {
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-topleft:5px;
+}
+
+.tabs ul li:last-child a {
+	-moz-border-radius-bottomright:5px;
+	-moz-border-radius-topright:5px;
 }
