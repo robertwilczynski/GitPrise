@@ -6,6 +6,7 @@
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
     <%= Url.Stylesheet("site.css")%>
     <%= Url.Stylesheet("repository.css")%>
+    <%= Url.Stylesheet("repositories.css")%>
     <%= Url.Script("jquery-1.4.2.min.js")%>
     <%= Url.Script("jquery.timeago.js")%>
     <%= Url.Script("jquery.corner.js")%>

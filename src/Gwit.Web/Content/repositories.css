@@ -1,0 +1,53 @@
+﻿img.hico
+{
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.repolist
+{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.repolist .repo
+{
+	list-style: none;
+	padding: 0px;
+	margin: 10px;
+	-moz-border-radius: 5px 5px 5px 5px !important;
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	background: none repeat scroll 0 0 #efefef;
+	border-color: -moz-use-text-color #A5A5A5 #A5A5A5;
+	border-right: 1px solid #A5A5A5;
+	border-style: none solid solid;
+	border-width: medium 1px 1px;
+}
+
+.repo > .head
+{
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	background: none repeat scroll 0 0 #eee;
+	border-bottom: 1px solid #969696;
+	border-top: 1px solid #FFFFFF;
+	padding: 10px;
+	margin: 0px;
+	position: relative;
+}
+
+.repo > .content
+{
+	border-bottom: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
+	padding: 10px;
+}
+
+.repo > .foot
+{
+	background: none repeat scroll 0 0 #eee;
+	border-top: 1px solid #969696;
+	line-height: 22px;
+	padding: 0 32px;
+}

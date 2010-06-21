@@ -261,22 +261,22 @@ html ul.topnav li ul.subnav li a:hover
 }
 
 .tabs ul li a {
-border-color:#A9A9A9 #A9A9A9 #A9A9A9 -moz-use-text-color;
-border-style:solid solid solid none;
-border-width:1px 1px 1px medium;
-color:#656565;
-display:block;
-float:left;
-font-size:11px;
-line-height:21px;
-padding:0 10px;
-text-decoration:none;
+	border-color:#A9A9A9 #A9A9A9 #A9A9A9 -moz-use-text-color;
+	border-style:solid solid solid none;
+	border-width:1px 1px 1px medium;
+	color:#656565;
+	display:block;
+	float:left;
+	font-size:11px;
+	line-height:21px;
+	padding:0 10px;
+	text-decoration:none;
 }
 
 .tabs ul li a.current {
-border-bottom:1px solid #2B2B2B;
-border-top:1px solid #2B2B2B;
-color:#FFFFFF;
+	border-bottom:1px solid #2B2B2B;
+	border-top:1px solid #2B2B2B;
+	color:#FFFFFF;
 }
 
 .tabs ul li:first-child a {

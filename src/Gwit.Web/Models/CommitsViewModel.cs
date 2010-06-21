@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using GitSharp;
 using System.Linq;
+using System.Web.Routing;
+using Gwit.Core.Web.Mvc;
 
 namespace Gwit.Web.Models
 {
@@ -21,8 +23,14 @@ namespace Gwit.Web.Models
             List.AddRange(commits);
         }
 
-        public CommitsViewModel(Repository repository, string repositoryName)
-            : base(repository, repositoryName, null)
+        public CommitsViewModel(Repository repository, RequestContext context)
+            : this (repository, context.GetRepositoryName(), context.GetTreeish())
+        {
+
+        }
+
+        public CommitsViewModel(Repository repository, string repositoryName, string treeish)
+            : base(repository, repositoryName, treeish)
         {
             List = new List<Commit>();
         }

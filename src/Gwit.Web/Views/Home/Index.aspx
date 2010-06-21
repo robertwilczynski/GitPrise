@@ -6,25 +6,33 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         Index</h2>
+        <ul class="repolist">
+        <li>
     <% foreach (var item in Model.List)
        { %>
     <ul class="repo">
-        <li class="name">
+        <li class="head">
+            <img src="<%= Url.Image("repo.png") %>" alt="<%: item.Name %>" class="hico" />
+            
             <a href="<%= Url.Action("Details", "Repository", new { repositoryName = item.Name }) %>">
                 <%: item.Name %></a>
         </li>
-        <li class="desc">
-            <%: item.Description %></li>
-        <li class="stats">
-            <%: item.Description %></li>
+        <li class="content">            
+        </li>
+        <li class="foot">
+        <div>last change by <%: item.CurrentCommit.Author.Name %> <%: Html.DateTime(item.CurrentCommit.AuthorDate) %> </div>
+        <div>commited by <%: item.CurrentCommit.Committer.Name %> <%: Html.DateTime(item.CurrentCommit.CommitDate) %> </div>
+            </li>
     </ul>
     <% } %>
+    </li>
+    </ul>
     <p>
         <%: Html.ActionLink("Create New", "Create") %>
     </p>
-    <script type="text/javascript">
+<%--    <script type="text/javascript">
         $(function () {
             $(".repo").corner(10);
         });
-    </script>
+    </script>--%>
 </asp:Content>

@@ -149,7 +149,7 @@ namespace Gwit.Web.Controllers
                 {
                     reference = Repository.Branches["master"];
                 }
-                var viewModel = new CommitsViewModel(Repository, repositoryName);
+                var viewModel = new CommitsViewModel(Repository, repositoryName, id);
                 var commit = (reference.Target as Commit);
                 CommitHarvester harvester = new CommitHarvester(commit, DateTime.UtcNow.AddDays(-30), 20);
                 viewModel.AddCommits(harvester.Collect());

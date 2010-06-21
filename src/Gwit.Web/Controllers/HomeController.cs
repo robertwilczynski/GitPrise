@@ -35,30 +35,22 @@ namespace Gwit.Web.Controllers
             var viewModel = new RepositoriesViewModel { List = new List<RepositoryViewModel>() };
             foreach (string path in dirs)
             {
-                if (Repository.IsValid(path, true))
+                var isValid = Repository.IsValid(path);
+                if (isValid)
                 {
                     using (var repo = new Repository(path))
                     {
                         viewModel.List.Add(new RepositoryViewModel
                         {
-                            Name = Path.GetFileName(repo.Directory.TrimGit()),
+                            Name = repo.IsBare ? Path.GetFileName(repo.Directory.TrimGit())
+                            : Path.GetFileName(path.TrimGit()),
                             Description = repo.Directory,
                             Path = repo.Directory,
+                            CurrentCommit = repo.Branches["master"].CurrentCommit
                         });
                     }
                 }
-                else if (Repository.IsValid(path))
-                {
-                    using (var repo = new Repository(path))
-                    {
-                        viewModel.List.Add(new RepositoryViewModel
-                        {
-                            Name = Path.GetFileName(path.TrimGit()),
-                            Description = repo.Directory,
-                            Path = repo.Directory,
-                        });
-                    }
-                }
+
             }
 
             return View(viewModel);
