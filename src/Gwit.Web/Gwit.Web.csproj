@@ -125,6 +125,7 @@
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\utils.js" />
     <Content Include="Views\Repository\Blob.aspx" />
+    <Content Include="Views\Repository\ChangeView.ascx" />
     <Content Include="Views\Repository\Commit.aspx" />
     <Content Include="Views\Repository\Commits.aspx" />
     <Content Include="Views\Repository\BlobView.ascx" />

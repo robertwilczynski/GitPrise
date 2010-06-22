@@ -128,8 +128,11 @@ namespace Gwit.Web.Controllers
         {
             try
             {
-                var commit = Repository.Get<Commit>(id);
-                var viewModel = new CommitViewModel(Repository, Request.RequestContext, commit);
+                var commit = Repository.Get<Commit>(id);                
+                var viewModel = new CommitViewModel(Repository, Request.RequestContext, commit)
+                {
+
+                };
                 return View(viewModel);
             }
             catch (Exception ex)
