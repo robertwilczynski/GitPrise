@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using IronPython.Runtime;
 using Microsoft.Scripting.Hosting;
 using System.Collections;
 using Gwit.Core.SyntaxHighlighting;
-using System.IO;
 using System.Reflection;
 using ScriptUtils = Microsoft.Scripting.Utils;
 
@@ -29,7 +27,7 @@ namespace Gwit.SyntaxHighlighting.Pygments
 
         static ScriptScope _scope;
 
-        private void InitializeHosting()
+        private static void InitializeHosting()
         {
             _engine = IronPython.Hosting.Python.CreateEngine();
 
@@ -42,10 +40,9 @@ namespace Gwit.SyntaxHighlighting.Pygments
 
         }
 
-        public PygmentsHighlightingService()
+        static PygmentsHighlightingService()
         {
-            if (_engine == null)
-                InitializeHosting();
+            InitializeHosting();
         }
          
         string[] _styles;
