@@ -11,12 +11,12 @@ namespace Gwit.Web.Models
 
         public string FormattedData { get; set; }
 
-        public BlobViewModel(Repository repository, RequestContext context, Leaf blob)
+        public BlobViewModel(Repository repository, RepositoryNavigationRequest request, Leaf blob)
             : this(repository,
-                context.GetRepositoryName(),
-                context.GetTreeish(),
+                request.RepositoryName,
+                request.Treeish,
                 blob,
-                new PathViewModel(context, blob))
+                new PathViewModel(request, blob))
         {
         }
         public BlobViewModel(Repository repository, string repositoryName,

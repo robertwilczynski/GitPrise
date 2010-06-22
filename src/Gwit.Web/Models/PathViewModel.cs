@@ -2,9 +2,8 @@ using System;
 using GitSharp;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Linq;
-using Gwit.Core.Web.Mvc;
+using System.Web;
 
 namespace Gwit.Web.Models
 {
@@ -15,21 +14,20 @@ namespace Gwit.Web.Models
         public Element CurrentItem { get; private set; }
         public bool IsRootEqualToCurrentItem { get; private set; }
 
-        public PathViewModel(RequestContext context, AbstractTreeNode node)
-            : this(context,
-                context.GetRepositoryName(),
-                context.GetTreeish(),
+        public PathViewModel(RepositoryNavigationRequest request, AbstractTreeNode node)
+            : this(request,
+                request.RepositoryName,
+                request.Treeish,
                 node)
         {
         }
 
-        public PathViewModel(RequestContext context, string repositoryName, string id, AbstractTreeNode node)
+        public PathViewModel(RepositoryNavigationRequest request, string repositoryName, string id, AbstractTreeNode node)
         {
             Elements = new List<Element>();
 
-            CurrentItem = new Element(context, repositoryName, id, node);
+            CurrentItem = new Element(request, repositoryName, id, node);
 
-            var parts = node.Path.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             var currentNode = node;
 
             while (currentNode.Parent != null)
@@ -37,12 +35,12 @@ namespace Gwit.Web.Models
                 currentNode = currentNode.Parent;
                 if (currentNode.Parent != null)
                 {
-                    Elements.Add(new Element(context, repositoryName, id, currentNode));
+                    Elements.Add(new Element(request, repositoryName, id, currentNode));
                 }
             }
 
             Elements = new List<Element>(Elements.Reverse());
-            Root = new Element(context, repositoryName, id, currentNode);
+            Root = new Element(request, repositoryName, id, currentNode);
             IsRootEqualToCurrentItem = (currentNode == node);
         }
 
@@ -52,17 +50,17 @@ namespace Gwit.Web.Models
             public string Url { get; set; }
             public string IsNavigationElement { get; set; }
 
-            public Element(RequestContext context, string repositoryName, string treeish, AbstractTreeNode node)
+            public Element(RepositoryNavigationRequest request, string repositoryName, string treeish, AbstractTreeNode node)
             {
-                var helper = new UrlHelper(context);
+                var helper = new UrlHelper(HttpContext.Current.Request.RequestContext);
 
                 Text = !String.IsNullOrEmpty(node.Name) ? node.Name : repositoryName;
-                Url = helper.Action("Tree", "Repository", new
+                Url = helper.Action("tree", "Repository", new
                 {
                     repositoryName = repositoryName,
                     id = treeish,
                     path = node.Path,
-                    location = context.GetRepositoryLocation(),
+                    location = request.RepositoryLocation,
                 });
             }
         }

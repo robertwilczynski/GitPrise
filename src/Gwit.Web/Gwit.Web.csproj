@@ -88,6 +88,7 @@
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\PathViewModel.cs" />
     <Compile Include="Models\RepositoriesViewModel.cs" />
+    <Compile Include="Models\RepositoryNavigationRequest.cs" />
     <Compile Include="Models\RepositoryNavigationViewModelBase.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />

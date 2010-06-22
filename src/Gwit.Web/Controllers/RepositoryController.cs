@@ -19,10 +19,6 @@ namespace Gwit.Web.Controllers
         private IRepositoryResolver _repoResolver;
         private IHighlightingService _hightlightingService;
 
-        public string RepositoryLocation { get; set; }
-        public string RepositoryName { get; set; }
-        public string Path { get; set; }
-        public string Treeish { get; set; }
         public Repository Repository { get; set; }
 
         public RepositoryController(
@@ -36,26 +32,27 @@ namespace Gwit.Web.Controllers
             _settings = _configurationProvider.Load();
         }
 
-
-        public ActionResult Details(string repositoryName)
+        [HttpGet]
+        public ActionResult Details(RepositoryNavigationRequest request)
         {
-            return Tree(repositoryName, "master", null);
+            return Tree(request);
         }
 
-        public ActionResult Blob(string repositoryName, string id, string path)
+        [HttpGet]
+        public ActionResult Blob(RepositoryNavigationRequest request)
         {
             try
             {
                 AbstractTreeNode node = null;
 
-                var obj = Repository.Get<AbstractObject>(id);
+                var obj = Repository.Get<AbstractObject>(request.Treeish);
                 if (obj is Commit)
                 {
-                    node = (obj as Commit).Tree.Node(path);
+                    node = (obj as Commit).Tree.Node(request.Path);
                 }
                 else if (obj is Tree)
                 {
-                    node = (obj as Tree).Node(path);
+                    node = (obj as Tree).Node(request.Path);
                 }
 
                 if (node == null)
@@ -70,7 +67,7 @@ namespace Gwit.Web.Controllers
                 }
 
                 var viewModel = new BlobViewModel(
-                    Repository, Request.RequestContext, blob)
+                    Repository, request, blob)
                     {
                         FormattedData = _hightlightingService.GenerateHtml(blob.Data, blob.Path, null)
                     };
@@ -79,17 +76,18 @@ namespace Gwit.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(repositoryName, ex);
+                throw new InvalidOperationException(request.RepositoryName, ex);
             }
         }
 
-        public ActionResult Tree(string repositoryName, string id, string path)
+        [HttpGet]
+        public ActionResult Tree(RepositoryNavigationRequest request)
         {
             try
             {
                 AbstractTreeNode node = null;
 
-                var obj = Repository.Get<AbstractObject>(id);
+                var obj = Repository.Get<AbstractObject>(request.Treeish);
                 if (obj is Commit)
                 {
                     node = (obj as Commit).Tree;
@@ -104,7 +102,7 @@ namespace Gwit.Web.Controllers
                     throw new InvalidOperationException("Invalid path");
                 }
 
-                var tree = (node as Tree).Node(path) as Tree;
+                var tree = (node as Tree).Node(request.Path) as Tree;
                 if (tree == null)
                 {
                     throw new InvalidOperationException("Path is not pointing to a tree.");
@@ -112,7 +110,7 @@ namespace Gwit.Web.Controllers
 
                 var viewModel = new TreeViewModel(
                     Repository,
-                    Request.RequestContext,
+                    request,
                     tree
                 );
                 return View("Tree", viewModel);
@@ -120,16 +118,17 @@ namespace Gwit.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(repositoryName, ex);
+                throw new InvalidOperationException(request.RepositoryName, ex);
             }
         }
 
-        public ActionResult Commit(string repositoryName, string id)
+        [HttpGet]
+        public ActionResult Commit(RepositoryNavigationRequest request)
         {
             try
             {
-                var commit = Repository.Get<Commit>(id);                
-                var viewModel = new CommitViewModel(Repository, Request.RequestContext, commit)
+                var commit = Repository.Get<Commit>(request.Treeish);
+                var viewModel = new CommitViewModel(Repository, request, commit)
                 {
 
                 };
@@ -137,22 +136,22 @@ namespace Gwit.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(repositoryName, ex);
+                throw new InvalidOperationException(request.RepositoryName, ex);
             }
-
         }
 
-        public ActionResult Commits(string repositoryName, string id)
+        [HttpGet]
+        public ActionResult Commits(RepositoryNavigationRequest request)
         {
             try
             {
 
                 Ref reference = null;
-                if (String.IsNullOrEmpty(id))
+                if (String.IsNullOrEmpty(request.Treeish))
                 {
                     reference = Repository.Branches["master"];
                 }
-                var viewModel = new CommitsViewModel(Repository, repositoryName, id);
+                var viewModel = new CommitsViewModel(Repository, request.RepositoryName, request.Treeish);
                 var commit = (reference.Target as Commit);
                 CommitHarvester harvester = new CommitHarvester(commit, DateTime.UtcNow.AddDays(-30), 20);
                 viewModel.AddCommits(harvester.Collect());
@@ -163,7 +162,7 @@ namespace Gwit.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(repositoryName, ex);
+                throw new InvalidOperationException(request.RepositoryName, ex);
             }
 
         }

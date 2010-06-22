@@ -1,7 +1,5 @@
 using System;
 using GitSharp;
-using System.Web.Routing;
-using Gwit.Core.Web.Mvc;
 
 namespace Gwit.Web.Models
 {
@@ -12,8 +10,8 @@ namespace Gwit.Web.Models
         {
             
         }
-        public CommitViewModel(Repository repository, RequestContext context, Commit commit)
-            : this(repository, context.GetRepositoryName(), commit.Hash)
+        public CommitViewModel(Repository repository, RepositoryNavigationRequest request, Commit commit)
+            : this(repository, request.RepositoryName, commit.Hash)
         {
             CurrentCommit = commit;
         }
