@@ -7,9 +7,16 @@
     <%= Url.Stylesheet("site.css")%>
     <%= Url.Stylesheet("repository.css")%>
     <%= Url.Stylesheet("repositories.css")%>
+
+    <%= Url.Stylesheet("dropdown/dropdown.css")%>
+    <%= Url.Stylesheet("dropdown/themes/my/default.css")%>
+
+
     <%= Url.Script("jquery-1.4.2.min.js")%>
     <%= Url.Script("jquery.timeago.js")%>
     <%= Url.Script("jquery.corner.js")%>
+
+
 </head>
 
 <body>

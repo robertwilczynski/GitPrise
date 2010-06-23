@@ -4,13 +4,33 @@
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">
     <%: Model.Title %>
     <asp:ContentPlaceHolder ID="TitleContent" runat="server">
-        
     </asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         <a href="">
             <%: Model.RepositoryName %></a></h2>
+<%--            <div class="topnav">
+    <ul id="nav" class="dropdown dropdown-horizontal">
+        <li><a href="#">Branches [<%: Model.Branches.Count %>]:</a>
+            <ul>
+                <% foreach (var item in Model.Branches)
+                   {%>
+                <li><a href="<%: Html.TreeUrl(item) %>">
+                    <%: item %></a> </li>
+                <% }%>
+            </ul>
+            <li><a href="#">Tags [<%: Model.Tags.Count %>]:</a>
+                <ul>
+                    <% foreach (var item in Model.Tags)
+                       {%>
+                    <li><a href="<%: Html.TreeUrl(item) %>">
+                        <%: item %></a> </li>
+                    <% }%>
+                </ul>
+    </ul>
+    </div>--%>
+
     <ul class="topnav">
         <li><a href="#">Branches [<%: Model.Branches.Count %>]:</a>
             <ul class="subnav" style="display: none;">
@@ -31,10 +51,13 @@
             </ul>
             <span class=""></span></li>
     </ul>
-    <%= Html.DisplayFor(m => m.CurrentCommit) %>
+
+    <div class="main-commit">
+        <%= Html.DisplayFor(m => m.CurrentCommit) %>
+    </div>
     <asp:ContentPlaceHolder ID="MainContent" runat="server">
     </asp:ContentPlaceHolder>
-    <script type="text/javascript">
+        <script type="text/javascript">
         $(document).ready(function () {
 
             $("ul.topnav li a").click(function () { //When trigger is clicked...

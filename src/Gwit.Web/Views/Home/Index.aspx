@@ -5,34 +5,47 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        Index</h2>
+        Repositories</h2>
+        Search <input id="filter" type="text" />
         <ul class="repolist">
-        <li>
+
     <% foreach (var item in Model.List)
        { %>
-    <ul class="repo">
-        <li class="head">
-            <img src="<%= Url.Image("repo.png") %>" alt="<%: item.Name %>" class="hico" />
-            
+    <li id="<%: item.Name %>" class="repo">                
+        <div class="head">
+            <img src="<%= Url.Image("repo_big.png") %>" alt="<%: item.Name %>" class="hico" />
             <a href="<%= Url.Action("Details", "Repository", new { repositoryName = item.Name }) %>">
                 <%: item.Name %></a>
-        </li>
-        <li class="content">            
-        </li>
-        <li class="foot">
-        <div>last change by <%: item.CurrentCommit.Author.Name %> <%: Html.DateTime(item.CurrentCommit.AuthorDate) %> </div>
-        <div>commited by <%: item.CurrentCommit.Committer.Name %> <%: Html.DateTime(item.CurrentCommit.CommitDate) %> </div>
-            </li>
-    </ul>
-    <% } %>
+            <div class="content">last change by <%: item.CurrentCommit.Author.Name %> <%: Html.DateTime(item.CurrentCommit.AuthorDate) %> 
+            commited <% if (!item.CurrentCommit.IsCommittedByAuthor) { %>by <%: item.CurrentCommit.Committer.Name %> <% } %>
+            
+            <%: Html.DateTime(item.CurrentCommit.CommitDate) %> </div>
+        </div>
+        <div class="foot">
+            
+        </div>
     </li>
+    <% } %>
+
     </ul>
     <p>
         <%: Html.ActionLink("Create New", "Create") %>
     </p>
-<%--    <script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
-            $(".repo").corner(10);
+
+            $("#filter").keyup(function () {
+                var pattern = $("#filter").val();
+                $(".repo").each(function (idx, el) {
+                    if (el.id.indexOf(pattern) > -1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+
+            });
+
         });
-    </script>--%>
+    </script>
 </asp:Content>

@@ -1,5 +1,11 @@
 ﻿/* 
 ----------------------------------------------------------*/
+a.sha
+{
+	 font-family: Consolas,"Courier New";
+	 color: #333;
+}
+
 div.commit
 {
 	border: 1px solid #ddd;
@@ -50,37 +56,6 @@ div.commit div.details ul li a.sha
 	 padding-left: 10px;
 }
 
-/* repos list
-----------------------------------------------------------*/
-ul.repo
-{
-	border: solid 1px #cacaca;
-	padding: 5px;
-}
-
-ul.repo li
-{
-	list-style-type: none;
-}
-
-li.repo > .name
-{
-	background-image: url('images/bc_bg.png');
-	background-repeat: repeat-x;
-	height: 30px;
-	line-height: 30px;
-	border-bottom: solid 1px #cacaca;
-	float: left;
-}
-
-li.repo > .desc
-{
-}
-
-li.repo > .stats
-{
-	background-color: #ff0000;
-}
 /* repo browser
 ----------------------------------------------------------*/
 table.repo
@@ -179,7 +154,7 @@ ul.breadcrumb a:hover
 ul.topnav
 {
 	list-style: none;
-	float: left;
+
 	font: 11px Arial, Helvetica, sans-serif;
 	background-image: url('images/bc_bg.png');
 	background-repeat: repeat-x;
@@ -191,6 +166,7 @@ ul.topnav
 	margin: 0px;
 	padding: 0px;
 }
+
 ul.topnav li
 {
 	float: left;
@@ -198,6 +174,7 @@ ul.topnav li
 	padding: 0;
 	position: relative; /*--Declare X and Y axis base--*/
 }
+
 ul.topnav li a
 {
 	padding: 0px 5px;
