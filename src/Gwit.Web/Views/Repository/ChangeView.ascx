@@ -1,17 +1,28 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<GitSharp.Change>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<ChangeViewModel>" %>
 
-<div>
-    <div><%: Model.Path %></div>
-    <div> Diff will go here 
-<%--    <% 
-        try
-        {
-            var diff = new GitSharp.Diff(Model.ReferenceObject as GitSharp.Blob, Model.ComparedObject as GitSharp.Blob);
-            foreach (var section in diff.Sections)
-            { %>
-       <%= section.EditWithRespectToA..ToString()%>
-    <% }
-        }
-        catch (Exception) { }%>
---%>    </div>
+<div class="filewrapper">
+    <div class="file">    
+        <table class="code">
+            <tbody>
+                <% foreach (var section in Model.Diff.Sections)
+                   {
+                       %>
+                <%foreach (var line in new DiffSectionViewModel(section).Lines)
+                   { %>
+                <tr>
+                    <td class="line">
+                        <%: line.LineA %>
+                    </td>
+                    <td class="line">
+                        <%: line.LineB %>
+                    </td>
+                    <td>
+                        <%= Html.DiffLine(line) %>
+                    </td>
+                </tr>
+                <% } %>
+                <% }%>
+            </tbody>
+        </table>
+    </div>
 </div>

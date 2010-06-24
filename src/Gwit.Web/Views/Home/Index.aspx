@@ -28,9 +28,6 @@
     <% } %>
 
     </ul>
-    <p>
-        <%: Html.ActionLink("Create New", "Create") %>
-    </p>
     <script type="text/javascript">
         $(function () {
 

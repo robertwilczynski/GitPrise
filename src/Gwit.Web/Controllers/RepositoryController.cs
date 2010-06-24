@@ -7,6 +7,7 @@ using Gwit.Core.GitSharp;
 using Gwit.Core.Services;
 using Gwit.Core.SyntaxHighlighting;
 using Gwit.Web.Mvc;
+using System.Text;
 
 namespace Gwit.Web.Controllers
 {
@@ -132,6 +133,21 @@ namespace Gwit.Web.Controllers
                 {
 
                 };
+                
+                foreach (var change in commit.Changes)
+                {
+                    // PASTE-START : borrowed from GitSharp.Demo
+                    var a = (change.ReferenceObject != null ? (change.ReferenceObject as Blob).RawData : new byte[0]);
+                    var b = (change.ComparedObject != null ? (change.ComparedObject as Blob).RawData : new byte[0]);
+                    
+                    a = (Diff.IsBinary(a) == true ? Encoding.ASCII.GetBytes("Binary content\nFile size: " + a.Length) : a);
+                    b = (Diff.IsBinary(b) == true ? Encoding.ASCII.GetBytes("Binary content\nFile size: " + b.Length) : b);
+                    // PASTE-END : borrowed from GitSharp.Demo
+
+                    var diff = new Diff(a, b);
+                    viewModel.Changes.Add(new ChangeViewModel(change, diff));
+                }
+                
                 return View(viewModel);
             }
             catch (Exception ex)

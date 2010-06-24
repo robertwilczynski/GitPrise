@@ -83,8 +83,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Models\BlobViewModel.cs" />
+    <Compile Include="Models\ChangeViewModel.cs" />
     <Compile Include="Models\CommitsViewModel.cs" />
     <Compile Include="Models\CommitViewModel.cs" />
+    <Compile Include="Models\DiffSectionViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\PathViewModel.cs" />
     <Compile Include="Models\RepositoriesViewModel.cs" />
@@ -99,10 +101,15 @@
     <Compile Include="Infrastructure\IoC\IoCRegistry.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\TreeViewModel.cs" />
+    <Compile Include="Mvc\Html\HtmlExtensions.cs" />
     <Compile Include="Mvc\RepositoryRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\diff-remove.png" />
+    <Content Include="Content\images\diff-add.png" />
+    <Content Include="Content\images\file.txt.png" />
+    <Content Include="Content\images\diff-modify.png" />
     <Content Include="Content\images\repo_big.png" />
     <Content Include="Content\images\git.png" />
     <Content Include="Content\images\github.png" />
@@ -131,6 +138,8 @@
     <Content Include="Views\Repository\Commits.aspx" />
     <Content Include="Views\Repository\BlobView.ascx" />
     <Content Include="Views\Repository\DisplayTemplates\Commit.ascx" />
+    <Content Include="Views\Repository\_DiffSection.ascx" />
+    <Content Include="Views\Repository\DisplayTemplates\EditType.ascx" />
     <Content Include="Views\Repository\DisplayTemplates\PathViewModel.ascx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Global.asax" />

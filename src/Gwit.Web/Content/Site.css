@@ -32,27 +32,27 @@
 
 a
 {
-	color: #034af3;
+	color: #B93F10;
 	text-decoration: none;
 }
 
 a:link
 {
-	color: #034af3;
+	color: #B93F10;
 	text-decoration: none;
 }
 a:visited
 {
-	color: #505abc;
+	color: #B93F10;
 }
 a:hover
 {
-	color: #1d60ff;
+	color: #B93F10;
 	text-decoration: underline;
 }
 a:active
 {
-	color: #12eb87;
+	color: #B93F10;
 }
 
 p, ul
@@ -66,7 +66,7 @@ p, ul
 h1, h2, h3, h4, h5, h6
 {
 	font-size: 1.5em;
-	color: #000;
+	color: #B93F10;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -166,7 +166,7 @@ ul#menu li a
 	text-decoration: none;
 	line-height: 2.8em;
 	background-color: #e8eef4;
-	color: #034af3;
+	color: #B93F10;
 }
 
 ul#menu li a:hover
