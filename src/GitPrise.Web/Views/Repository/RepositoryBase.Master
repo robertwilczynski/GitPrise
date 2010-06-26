@@ -1,0 +1,58 @@
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage<RepositoryNavigationViewModelBase>"
+    MasterPageFile="~/Views/Shared/Site.Master" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+    <%: Model.Title %>
+    <asp:ContentPlaceHolder ID="TitleContent" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <h2>
+    
+        <a href="<%: Html.RepositoryRootUrl() %>">
+            <%: Model.RepositoryName %></a></h2>
+
+    <ul class="topnav">
+        <li><a href="#">Branches [<%: Model.Branches.Count %>]:</a>
+            <ul class="subnav" style="display: none;">
+                <% foreach (var item in Model.Branches)
+                   {%>
+                <li><a href="<%: Html.TreeUrl(item) %>">
+                    <%: item %></a> </li>
+                <% }%>
+            </ul>
+            <span class=""></span></li>
+        <li><a href="#">Tags [<%: Model.Tags.Count %>]:</a>
+            <ul class="subnav" style="display: none;">
+                <% foreach (var item in Model.Tags)
+                   {%>
+                <li><a href="<%: Html.TreeUrl(item) %>">
+                    <%: item %></a> </li>
+                <% }%>
+            </ul>
+            <span class=""></span></li>
+    </ul>
+
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+    </asp:ContentPlaceHolder>
+        <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("ul.topnav li a").click(function () { //When trigger is clicked...
+                //Following events are applied to the subnav itself (moving subnav up and down)
+                $(this).parent().find("ul.subnav").show(); //Drop down the subnav on click
+
+                $(this).parent().hover(function () {
+                }, function () {
+                    $(this).parent().find("ul.subnav").hide(); //When the mouse hovers out of the subnav, move it back up
+                });
+                //Following events are applied to the trigger (Hover events for the trigger)
+            }).hover(function () {
+                $(this).addClass("subhover"); //On hover over, add class "subhover"
+            }, function () { //On Hover Out
+                $(this).removeClass("subhover"); //On hover out, remove class "subhover"
+            });
+
+        }); 
+    </script>
+</asp:Content>

@@ -161,14 +161,17 @@ namespace GitPrise.Web.Controllers
         {
             try
             {
-
-                Ref reference = null;
-                if (String.IsNullOrEmpty(request.Treeish))
-                {
-                    reference = Repository.Branches["master"];
-                }
                 var viewModel = new CommitsViewModel(Repository, request.RepositoryName, request.Treeish);
-                var commit = (reference.Target as Commit);
+                var obj = Repository.Get<AbstractObject>(request.Treeish);
+                Commit commit = null;
+                if (obj.IsCommit)
+                {
+                    commit = obj as Commit;
+                }
+                else if (obj.IsTree)
+                {
+                    commit = (obj as Tree).GetLastCommit();
+                }
                 CommitHarvester harvester = new CommitHarvester(commit, DateTime.UtcNow.AddDays(-30), 20);
                 viewModel.AddCommits(harvester.Collect());
                 viewModel.ApplyGrouping();

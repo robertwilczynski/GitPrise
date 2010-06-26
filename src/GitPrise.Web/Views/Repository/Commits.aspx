@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="Repository.Master" Inherits="System.Web.Mvc.ViewPage<CommitsViewModel>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="RepositoryBase.Master" Inherits="System.Web.Mvc.ViewPage<CommitsViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Commits
@@ -14,7 +14,9 @@
         <%= group.Key.ToShortDateString() %></h3>
     <% foreach (var commit in group)
        { %>
-    <%= Html.DisplayFor(m => commit) %>
+    <div class="commit-wrap separate">
+        <%= Html.DisplayFor(m => commit) %>
+    </div>
     <% } %>
     <% } %>
 </asp:Content>
