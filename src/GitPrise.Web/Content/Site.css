@@ -25,9 +25,7 @@
 
 #content
 {
-
 	padding: 20px 20px;
-	
 }
 
 a
@@ -356,3 +354,7 @@ img.gravatar
 	border: 2px solid #fff;
 }
 
+p.credits a
+{
+	display: block;
+}

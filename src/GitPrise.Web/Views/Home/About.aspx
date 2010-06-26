@@ -3,35 +3,33 @@
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     About Us
 </asp:Content>
-
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h2>Powered by</h2>
-    <p>
-    <a href="http://git-scm.com/">
-        <img src="<%= Url.Image("git.png") %>" alt="Git" />
+    <h2>
+        Powered by</h2>
+    <p class="credits">
+        <a href="http://git-scm.com/">
+            Git
+        </a><a href="http://eqqon.com/index.php/GitSharp">
+            GitSharp
         </a>
-    <a href="http://www.eqqon.com/index.php/GitSharp">
-        <img src="<%= Url.Image("gitsharp.png") %>" alt="GitSharp" />
+        <a href="http://pygments.org/">
+            Pygments
         </a>
-
+        <a href="http://jquery.org/">
+            jQuery
+        </a>
     </p>
-<%--    <p>
-    <a href="">
-        <img src="<%= Url.Image("gitorious.png") %>" alt="gitorious" />
-        </a>
+    <h2>
+        Inspired by</h2>
+    <p class="credits">
+        <a href="http://github.com/">GitHub</a>
+        <a href="http://gitorious.org/">Gitorious</a>
     </p>
---%>
-
-    <h2>Inspired by</h2>
-    
-    <p>
-    <a href="http://github.com/">
-        <img src="<%= Url.Image("github.png") %>" alt="github" />
-        </a>
-    <a href="http://gitorious.org/">
-        <img src="<%= Url.Image("gitorious.png") %>" alt="gitorious" />
-        </a>
-
+    <h2>
+        Bits and pieces taken from</h2>
+    <p class="credits">
+        <a href="http://github.com/devhawk/pygments.wlwriter">devhawk / pygments.wlwriter</a>
+        <a href="http://github.com/henon/GitSharp.Demo"> henon / GitSharp.Demo  </a>
+        
     </p>
 </asp:Content>
