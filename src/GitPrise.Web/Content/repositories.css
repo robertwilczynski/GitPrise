@@ -1,0 +1,47 @@
+﻿img.hico
+{
+	float: left;
+	margin-right: 5px;
+}
+
+.repolist
+{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.repolist .repo
+{
+	list-style: none;
+	padding: 0px;
+	margin: 10px;
+	-moz-border-radius: 5px;
+	background-color: #efefef;
+	/*
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	border-color: -moz-use-text-color #A5A5A5 #A5A5A5;*/
+}
+
+.repo > .head
+{
+	display: block;
+	padding: 10px;
+	margin: 0px;
+	position: relative;
+	font-size:  x-large;
+}
+
+div.content
+{	
+	padding: 10px;
+	font-size: small;
+	display: block;
+}
+
+.repo > .foot
+{
+
+	line-height: 22px;
+	padding: 0 32px;
+}

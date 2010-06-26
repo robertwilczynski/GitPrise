@@ -1,0 +1,383 @@
+﻿/* 
+----------------------------------------------------------*/
+a.sha
+{
+	font-family: Consolas, "Courier New";
+	color: #333;
+}
+.separate
+{
+	margin-bottom: 10px;
+}
+.main-commit
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: #efefef;
+}
+
+div.commit-wrap
+{
+	border: 1px solid #ddd;
+	background-color: #efefef;
+	overflow: hidden;
+	width: 100%;
+}
+
+div.commit
+{
+
+	margin: 5px;
+}
+
+div.commit div.main
+{
+	float: left;
+}
+
+div.commit div.main img
+{
+	display: inline;
+	float: left;
+	margin-right: 5px;
+}
+
+div.commit div.main div.person
+{
+	clear: both;
+	margin-top: 10px;
+}
+
+div.commit div.details
+{
+	float: right;
+}
+
+div.commit div.details ul
+{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+div.commit div.details ul li span.lbl
+{
+	color: #B93F10;
+	font-weight: bold;
+}
+
+div.commit div.details ul li a.sha
+{
+	float: right;
+	padding-left: 10px;
+}
+
+/* repo browser
+----------------------------------------------------------*/
+table.repo
+{
+	width: 100%;
+}
+
+table.repo td.ico
+{
+	width: 20px;
+}
+
+table.repo tr
+{
+	background-color: #efefef;
+}
+
+table.repo tr.alt
+{
+	background-color: #fff;
+}
+
+table.repo a
+{
+	text-decoration: none;
+	color: #333;
+}
+
+table.repo a:hover
+{
+	text-decoration: underline;
+	color: #333;
+}
+
+div.filewrapper
+{
+	position: relative;
+	width: 920px;
+}
+
+div.file
+{
+	overflow: auto;
+	border: 1px solid #cacaca;
+	border-top: 0px;
+	width: 920px;
+}
+
+.bar
+{
+	width: 920px;
+	background-image: url('images/bc_bg.png');
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #cacaca;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;	
+}
+
+.bar img
+{
+	float: left;
+	-moz-border-radius: 5px;
+	background-color: #efefef;
+	border: 1px solid #ccc;
+	border-right-color: #ddd;
+	border-bottom-color: #ddd;
+	padding: 3px;
+	margin-left: 5px;
+	margin-top: 3px;
+	margin-right: 5px;
+}
+
+#changeset
+{
+	 width: 100%;	
+}
+
+#changeset a
+{
+	color: #333;
+}
+
+a#repository
+{
+	color: #B93F10;
+}
+.change
+{
+	margin-bottom: 10px;
+}
+
+a.change-link
+{
+	float: right;
+	display: inline;
+	margin-right: 10px;	
+	color: #B93F10;
+}
+
+ul.breadcrumb
+{
+	font: 11px Arial, Helvetica, sans-serif;
+	background-image: url('images/bc_bg.png');
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+	color: #9b9b9b;
+	border: solid 1px #cacaca;
+	width: 100%;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.breadcrumb li
+{
+	list-style-type: none;
+	float: left;
+	padding-left: 10px;
+}
+
+ul.breadcrumb a
+{
+	height: 30px;
+	display: block;
+	background-image: url('images/bc_separator.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-right: 15px;
+	text-decoration: none;
+	color: #454545;
+}
+
+.home
+{
+	border: none;
+	margin: 8px 0px;
+}
+
+ul.breadcrumb a:hover
+{
+	color: #000;
+}
+
+/* nav
+*/
+ul.topnav
+{
+	list-style: none;
+	font: 11px Arial, Helvetica, sans-serif;
+	background-image: url('images/bc_bg.png');
+	background-repeat: repeat-x;
+	height: 30px;
+	line-height: 30px;
+	color: #9b9b9b;
+	border: solid 1px #cacaca;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.topnav li
+{
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative; /*--Declare X and Y axis base--*/
+}
+
+ul.topnav li a
+{
+	padding: 0px 5px;
+	color: #000;
+	display: block;
+	text-decoration: none;
+	float: left;
+}
+ul.topnav li a:hover
+{
+	/*background: url(topnav_hover.gif) no-repeat center top;*/
+}
+ul.topnav li span
+{
+	/*--Drop down trigger styles--*/
+	width: 17px;
+	height: 35px;
+	float: left; /*background: url(subnav_btn.gif) no-repeat center top;*/
+}
+ul.topnav li span.subhover
+{
+	background-position: center bottom;
+	cursor: pointer;
+}
+/*--Hover effect for trigger--*/
+ul.topnav li ul.subnav
+{
+	list-style: none;
+	position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+	left: 0;
+	top: 35px;
+	background: #eee;
+	margin: 0;
+	padding: 0;
+	display: none;
+	float: left;
+	min-width: 150px;
+	border: 1px solid #111;
+	max-height: 200px;
+	overflow: auto;
+	z-index: 999;
+}
+ul.topnav li ul.subnav li
+{
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid #252525; /*--Create bevel effect--*/
+	clear: both;
+	width: 100%;
+}
+html ul.topnav li ul.subnav li a
+{
+	float: left;
+	padding-left: 20px;
+	width: auto;
+}
+html ul.topnav li ul.subnav li a:hover
+{
+	/*--Hover effect for subnav links--*/ /*background: #222 url(dropdown_linkbg.gif) no-repeat 10px center; */
+}
+
+.tabs ul li a
+{
+	border-color: #A9A9A9 #A9A9A9 #A9A9A9 -moz-use-text-color;
+	border-style: solid solid solid none;
+	border-width: 1px 1px 1px medium;
+	color: #656565;
+	display: block;
+	float: left;
+	font-size: 11px;
+	line-height: 21px;
+	padding: 0 10px;
+	text-decoration: none;
+}
+
+.tabs ul li a.current
+{
+	border-bottom: 1px solid #2B2B2B;
+	border-top: 1px solid #2B2B2B;
+	color: #FFFFFF;
+}
+
+.tabs ul li:first-child a
+{
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-topleft: 5px;
+}
+
+.tabs ul li:last-child a
+{
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topright: 5px;
+}
+
+/*
+colors from diff merge
+*/
+.di
+{
+	background-color: #DDFFDD;
+}
+
+.dd
+{
+	background-color: #F9EFF0;
+}
+
+
+table.code
+{
+	padding: 0px;
+	margin: 0px;
+	border: 0px solid transparent;
+	width: 100%;
+}
+
+table.code td, pre
+{
+	padding: 0px;
+	margin: 0px;
+	border: 0px solid transparent;
+}
+
+table.code td.line
+{
+	color: #aaa;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-right: 1px solid #ccc;
+	background-color: #efefef;
+	
+}
+
+td.squash
+{
+	width: 1px;
+}

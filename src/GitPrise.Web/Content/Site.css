@@ -1,0 +1,358 @@
+﻿body
+{
+	background: none repeat scroll 0 0 #2D2D2D;
+	color: #4E4E4E;
+	font-family: "Helvetica Neue" ,Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	line-height: 1.461em;
+	margin: 0;
+	padding: 0 0 20px;
+}
+
+#page
+{
+	margin: 45px auto;
+	width: 960px;
+}
+
+#main
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+	float: left;
+	min-height: 400px;
+	width: 960px;
+}
+
+#content
+{
+
+	padding: 20px 20px;
+	
+}
+
+a
+{
+	color: #B93F10;
+	text-decoration: none;
+}
+
+a:link
+{
+	color: #B93F10;
+	text-decoration: none;
+}
+a:visited
+{
+	color: #B93F10;
+}
+a:hover
+{
+	color: #B93F10;
+	text-decoration: underline;
+}
+a:active
+{
+	color: #B93F10;
+}
+
+p, ul
+{
+	margin-bottom: 20px;
+	line-height: 1.6em;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+	font-size: 1.5em;
+	color: #B93F10;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+	font-size: 2em;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+h2
+{
+	padding: 0 0 10px 0;
+}
+h3
+{
+	font-size: 1.2em;
+}
+h4
+{
+	font-size: 1.1em;
+}
+h5, h6
+{
+	font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+	margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+#header
+{
+	position: relative;
+	margin-bottom: 0px;
+	color: #000;
+	padding: 0;
+}
+
+#header h1
+{
+	font-weight: bold;
+	padding: 5px 0;
+	margin: 0;
+	color: #fff;
+	border: none;
+	line-height: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 32px !important;
+}
+
+#footer
+{
+	color: #999;
+	padding: 10px 0;
+	text-align: center;
+	line-height: normal;
+	margin: 0;
+	font-size: .9em;
+}
+
+/* TAB MENU   
+----------------------------------------------------------*/
+ul#menu
+{
+	border-bottom: 1px #5C87B2 solid;
+	padding: 0 0 2px;
+	position: relative;
+	margin: 0;
+	text-align: right;
+}
+
+ul#menu li
+{
+	display: inline;
+	list-style: none;
+}
+
+ul#menu li#greeting
+{
+	padding: 10px 20px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	color: #fff;
+}
+
+ul#menu li a
+{
+	padding: 10px 20px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 2.8em;
+	background-color: #e8eef4;
+	color: #B93F10;
+}
+
+ul#menu li a:hover
+{
+	background-color: #fff;
+	text-decoration: none;
+}
+
+ul#menu li a:active
+{
+	background-color: #a6e2a6;
+	text-decoration: none;
+}
+
+ul#menu li.selected a
+{
+	background-color: #fff;
+	color: #000;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+	margin: 1em 0;
+	padding: 1em;
+	border: 1px solid #CCC;
+}
+
+fieldset p
+{
+	margin: 2px 12px 10px 10px;
+}
+
+legend
+{
+	font-size: 1.1em;
+	font-weight: 600;
+	padding: 2px 4px 8px 4px;
+}
+
+input[type="text"]
+{
+	width: 200px;
+	border: 1px solid #CCC;
+}
+
+input[type="password"]
+{
+	width: 200px;
+	border: 1px solid #CCC;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table
+{
+	border: 1px solid #cacaca;
+	border-collapse: collapse;
+}
+
+table td
+{
+	padding: 5px;
+	border: solid 1px #e8eef4;
+}
+
+table th
+{
+	padding: 6px 5px;
+	text-align: left;
+	background-color: #cacaca;
+	border: solid 1px #cacaca;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+	clear: both;
+}
+
+.error
+{
+	color: Red;
+}
+
+#menucontainer
+{
+	margin-top: 40px;
+}
+
+div#title
+{
+	display: block;
+	float: left;
+	text-align: left;
+}
+
+#logindisplay
+{
+	font-size: 1.1em;
+	display: block;
+	text-align: right;
+	margin: 10px;
+	color: White;
+}
+
+#logindisplay a:link
+{
+	color: white;
+	text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+	color: white;
+	text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+	color: white;
+	text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+	color: #ff0000;
+}
+
+.field-validation-valid
+{
+	display: none;
+}
+
+.input-validation-error
+{
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.validation-summary-valid
+{
+	display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label, .editor-label, .display-field, .editor-field
+{
+	margin: 0.5em 0;
+}
+
+.text-box
+{
+	width: 30em;
+}
+
+.text-box.multi-line
+{
+	height: 6.5em;
+}
+
+.tri-state
+{
+	width: 6em;
+}
+
+img
+{
+	border-width: 0px;
+}
+
+img.gravatar
+{
+	border: 2px solid #fff;
+}
+
