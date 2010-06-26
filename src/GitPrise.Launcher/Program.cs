@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text;
 
-namespace GitPrise
+namespace GitPrise.Launcher
 {
     class Program
     {
