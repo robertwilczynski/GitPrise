@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitPrise.Core", "GitPrise.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitPrise.SyntaxHighlighting.Pygments", "GitPrise.SyntaxHighlighting.Pygments\GitPrise.SyntaxHighlighting.Pygments.csproj", "{87E886F8-9013-499A-824A-A5994B72198E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D72727A0-2FA8-4C4C-9689-017689C36A10}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D72727A0-2FA8-4C4C-9689-017689C36A10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitPrise.Core.Tests", "Tests\GitPrise.Core.Tests\GitPrise.Core.Tests.csproj", "{06FE6209-02D7-4C61-B556-B0527D489715}"
 EndProject
