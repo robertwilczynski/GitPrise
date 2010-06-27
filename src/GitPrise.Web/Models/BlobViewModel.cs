@@ -1,4 +1,3 @@
-#region License
 
 // Copyright 2010 Robert Wilczynski (http://github.com/robertwilczynski/gitprise)
 //
@@ -14,12 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#endregion
 
 using System;
 using GitSharp;
-using System.Web.Routing;
-using GitPrise.Core.Web.Mvc;
 
 namespace GitPrise.Web.Models
 {
@@ -30,20 +26,11 @@ namespace GitPrise.Web.Models
         public string FormattedData { get; set; }
 
         public BlobViewModel(Repository repository, RepositoryNavigationRequest request, Leaf blob)
-            : this(repository,
-                request.RepositoryName,
-                request.Treeish,
-                blob,
-                new PathViewModel(request, blob))
-        {
-        }
-        public BlobViewModel(Repository repository, string repositoryName,
-            string treeish, Leaf blob, PathViewModel pathModel)
-            : base(repository, repositoryName, treeish)
+            : base(repository, request)
         {
             Blob = blob;
             Path = blob.Path;
-            PathModel = pathModel;
-        }
+            PathModel = new PathViewModel(request, blob);
+        }        
     }
 }

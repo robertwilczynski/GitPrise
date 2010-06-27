@@ -8,17 +8,15 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-    
-        <a href="<%: Html.RepositoryRootUrl() %>">
+        <a href="<%: Url.RepositoryRootUrl(Model) %>">
             <%: Model.RepositoryName %></a></h2>
-
     <ul class="topnav">
         <li><a href="#">Branches [<%: Model.Branches.Count %>]:</a>
             <ul class="subnav" style="display: none;">
                 <% foreach (var item in Model.Branches)
                    {%>
-                <li><a href="<%: Html.TreeUrl(item) %>">
-                    <%: item %></a> </li>
+                <li><a href="<%: Url.TreeUrl(item.Navigation) %>">
+                    <%: item.Name %></a> </li>
                 <% }%>
             </ul>
             <span class=""></span></li>
@@ -26,8 +24,8 @@
             <ul class="subnav" style="display: none;">
                 <% foreach (var item in Model.Tags)
                    {%>
-                <li><a href="<%: Html.TreeUrl(item) %>">
-                    <%: item %></a> </li>
+                <li><a href="<%: Url.TreeUrl(item.Navigation) %>">
+                    <%: item.Name%></a> </li>
                 <% }%>
             </ul>
             <span class=""></span></li>

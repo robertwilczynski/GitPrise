@@ -41,14 +41,8 @@ namespace GitPrise.Web.Models
             List.AddRange(commits);
         }
 
-        public CommitsViewModel(Repository repository, RequestContext context)
-            : this (repository, context.GetRepositoryName(), context.GetTreeish())
-        {
-
-        }
-
-        public CommitsViewModel(Repository repository, string repositoryName, string treeish)
-            : base(repository, repositoryName, treeish)
+        public CommitsViewModel(Repository repository, RepositoryNavigationRequest request)
+            : base(repository, request)
         {
             List = new List<Commit>();
         }

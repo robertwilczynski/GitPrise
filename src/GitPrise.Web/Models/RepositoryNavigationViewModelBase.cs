@@ -19,50 +19,64 @@
 using System;
 using GitSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GitPrise.Web.Models
 {
-    public class RepositoryNavigationViewModelBase
+    public class RepositoryNavigationViewModelBase : RepositoryNavigationRequest
     {
-        public string RepositoryName { get; private set; }
-        public string CommitId { get; private set; }
-        public Commit CurrentCommit { get; set; }
-        public List<string> Branches { get; set; }
-        public List<string> Tags { get; set; }
-        public string Path { get; set; }
+        public CommitViewModel CurrentCommit { get; set; }
+        public List<BranchViewModel> Branches { get; set; }
+        public List<BranchViewModel> Tags { get; set; }
         public PathViewModel PathModel { get; protected set; }
 
         virtual public string Title
         {
-            get 
+            get
             {
                 if (!String.IsNullOrEmpty(Path))
                 {
-                    return "{0} at {1} from {2}".Fill(Path, CommitId, RepositoryName); 
-                } 
-                return "{0} at {1}".Fill(RepositoryName, CommitId); 
+                    return "{0} at {1} from {2}".Fill(Path, Treeish, RepositoryName);
+                }
+                return "{0} at {1}".Fill(RepositoryName, Treeish);
             }
         }
 
         private RepositoryNavigationViewModelBase()
         {
-            Branches = new List<string>();
-            Tags = new List<string>();
+            Branches = new List<BranchViewModel>();
+            Tags = new List<BranchViewModel>();
         }
 
-        public RepositoryNavigationViewModelBase(Repository repository, string name, string treeish)
+        public RepositoryNavigationViewModelBase(Repository repository, RepositoryNavigationRequest request)
             : this()
         {
-            RepositoryName = name;
-            CommitId = treeish;
-            FillFromRepository(repository);
+            RepositoryName = request.RepositoryName;
+            Treeish = request.Treeish;
+            Path = request.Path;
+            RepositoryLocation = request.RepositoryLocation;
+            FillFromRepository(repository, request);
         }
 
-        public void FillFromRepository(Repository repository)
+        public void FillFromRepository(Repository repository, RepositoryNavigationRequest request)
         {
-            Branches.AddRange(repository.Branches.Keys);
-            Tags.AddRange(repository.Tags.Keys);
-            var obj = repository.Get<AbstractObject>(CommitId);
+            Branches.AddRange(repository.Branches.Keys.Select(x =>
+                new BranchViewModel(x, new RepositoryNavigationRequest()
+                {
+                    RepositoryName = request.RepositoryName,
+                    Treeish = x,
+                    RepositoryLocation = request.RepositoryLocation
+                })));
+
+            Tags.AddRange(repository.Tags.Keys.Select(x =>
+                new BranchViewModel(x, new RepositoryNavigationRequest()
+                {
+                    RepositoryName = request.RepositoryName,
+                    Treeish = x,
+                    RepositoryLocation = request.RepositoryLocation
+                })));
+
+            var obj = repository.Get<AbstractObject>(Treeish);
 
             if (obj.IsTag)
             {
@@ -71,13 +85,8 @@ namespace GitPrise.Web.Models
 
             if (obj.IsCommit)
             {
-                CurrentCommit = obj as Commit;
+                CurrentCommit = new CommitViewModel(repository, request, obj as Commit, true);
             }
-
-            //else if (obj is AbstractTreeNode)
-            //{
-            //    CurrentCommit = (obj as AbstractTreeNode).GetLastCommit();
-            //}
         }
     }
 }

@@ -19,24 +19,24 @@
 using System;
 using GitSharp;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 
 namespace GitPrise.Web.Models
 {
-    public class CommitViewModel : RepositoryNavigationViewModelBase
+    public class CommitDetailsViewModel : RepositoryNavigationViewModelBase
     {
         public List<ChangeViewModel> Changes { get; private set; }
 
-        public CommitViewModel(Repository repository, string name, string treeish)
-            : base(repository, name, treeish)
+        public CommitDetailsViewModel(Repository repository, RepositoryNavigationRequest request)
+            : base(repository, request)
         {
-            Changes = new List<ChangeViewModel>();   
+            Changes = new List<ChangeViewModel>();
         }
 
-        public CommitViewModel(Repository repository, RepositoryNavigationRequest request, Commit commit)
-            : this(repository, request.RepositoryName, commit.Hash)
+        public CommitDetailsViewModel(Repository repository, RepositoryNavigationRequest request, Commit commit)
+            : this(repository, new RepositoryNavigationRequest(request) { Treeish = commit.Hash })
         {
-            CurrentCommit = commit;
+            CurrentCommit = new CommitViewModel(repository, request, commit, true);
         }
     }
 }

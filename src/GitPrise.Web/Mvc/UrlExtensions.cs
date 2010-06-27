@@ -18,11 +18,9 @@
 
 using System;
 using System.Web.Mvc;
-using GitSharp;
-using GitPrise.Core.Web.Utils;
-using GitPrise.Core.Web.Utils.Gravatar;
+using GitPrise.Web.Models;
 
-namespace GitPrise.Core.Web.Mvc
+namespace GitPrise.Web.Mvc
 {
     public static class UrlExtensions
     {
@@ -60,7 +58,42 @@ namespace GitPrise.Core.Web.Mvc
             return helper.Content(helper.Action("GetServerStatus", "Home"));
         }
 
+        public static string GitUrl(this UrlHelper helper, string action, RepositoryNavigationRequest request)
+        {
+            var url = helper.Action(action, "Repository", new
+            {
+                repositoryName = request.RepositoryName,
+                id = request.Treeish,
+                path = request.Path,
+                location = request.RepositoryLocation
+            });
+            return url;
+        }
 
+        public static string TreeUrl(this UrlHelper helper, RepositoryNavigationRequest request)
+        {
+            return GitUrl(helper, "tree", request);
+        }
+
+        public static string CommitUrl(this UrlHelper helper, RepositoryNavigationRequest request)
+        {
+            return GitUrl(helper, "commit", request);
+        }
+
+        public static string BlobUrl(this UrlHelper helper, RepositoryNavigationRequest request)
+        {
+            return GitUrl(helper, "blob", request);
+        }
+
+        public static string RepositoryRootUrl(this UrlHelper helper, RepositoryNavigationRequest request)
+        {
+            var url = helper.Action("Details", "Repository", new
+            {
+                repositoryName = request.RepositoryName,
+                location = request.RepositoryLocation
+            });
+            return url;
+        }
     }
 
 }

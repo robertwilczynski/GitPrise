@@ -1,11 +1,11 @@
-<%@ Page Title="" Language="C#" MasterPageFile="Repository.Master" Inherits="System.Web.Mvc.ViewPage<CommitViewModel>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="Repository.Master" Inherits="System.Web.Mvc.ViewPage<CommitDetailsViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table id="changeset" class="separate">
         <tbody>
-            <% foreach (var change in Model.CurrentCommit.Changes)
+            <% foreach (var change in Model.CurrentCommit.Commit.Changes)
                { %>
             <tr>
                 <td class="squash">
@@ -62,7 +62,7 @@
             <div id="<%: change.Name %>" class="bar">
                 <%= Html.Image("file.txt.png", "", new { @class="ico" })%>
                 <%: change.Name%>
-                <a class="change-link" href="<%= Html.BlobUrl(change.Change.ComparedCommit.Hash, change.Change.Path) %>">
+                <a class="change-link" href="<%= Url.BlobUrl(change) %>">
                     View file @
                     <%: change.Change.ComparedCommit.ShortHash%></a>
             </div>

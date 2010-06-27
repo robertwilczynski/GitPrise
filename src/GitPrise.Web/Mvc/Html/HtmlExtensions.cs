@@ -20,6 +20,8 @@ using System;
 using System.Web.Mvc;
 using GitPrise.Web.Models;
 using GitSharp;
+using System.Web.Routing;
+using GitPrise.Core.Web.Mvc;
 
 namespace GitPrise.Web.Mvc.Html
 {
@@ -58,6 +60,34 @@ namespace GitPrise.Web.Mvc.Html
             builder.InnerHtml = mnemonic + helper.Encode(line.Text);
 
             return builder.ToString();
+        }
+
+        public static MvcHtmlString Image(this HtmlHelper helper, string location, string alternateText, object htmlAttributes = null)
+        {
+            var builder = new TagBuilder("img");
+            builder.Attributes.Add("src", UrlHelper.GenerateContentUrl(String.Format("~/Content/images/{0}", location), helper.ViewContext.HttpContext));
+            if (!String.IsNullOrEmpty(alternateText))
+            {
+                builder.Attributes.Add("alt", alternateText);
+            }
+            if (htmlAttributes != null)
+            {
+                builder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+            }
+            return MvcHtmlString.Create(builder.ToString());
+        }
+
+        public static MvcHtmlString DateTime(this HtmlHelper helper, DateTimeOffset? value)
+        {
+            if (!value.HasValue)
+            {
+                return MvcHtmlString.Empty;
+            }
+            var builder = new TagBuilder("span");
+            builder.SetInnerText(value.Value.ToLocalTime().DateTime.ToShortDateString());
+            builder.Attributes["title"] = value.Value.ToString("s");
+            builder.AddCssClass("timeago");
+            return MvcHtmlString.Create(builder.ToString());
         }
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,6 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\Gallio\Gallio35.dll</HintPath>
     </Reference>
+    <Reference Include="GitSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\GitSharp\GitSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GitSharp.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\GitSharp\GitSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="IronPython, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\DLR\IronPython.dll</HintPath>
@@ -74,11 +82,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\DLR\Microsoft.Scripting.ExtensionAttribute.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\lib\Moq\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.TestHelper">
+      <HintPath>..\..\..\lib\MVCContrib\MvcContrib.TestHelper.dll</HintPath>
+    </Reference>
     <Reference Include="pygments">
       <HintPath>..\..\..\lib\Pygments\pygments.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\ASP.NET MVC 2\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -88,6 +106,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxHighlighting\PygmentsHighlightingServiceTests.cs" />
+    <Compile Include="TestUtils.cs" />
+    <Compile Include="Web\Controllers\RepositoryControllerTests.cs" />
+    <Compile Include="Web\Models\RepositoryNavigationRequestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GitPrise.Core\GitPrise.Core.csproj">
@@ -97,6 +118,10 @@
     <ProjectReference Include="..\..\GitPrise.SyntaxHighlighting.Pygments\GitPrise.SyntaxHighlighting.Pygments.csproj">
       <Project>{87E886F8-9013-499A-824A-A5994B72198E}</Project>
       <Name>GitPrise.SyntaxHighlighting.Pygments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GitPrise.Web\GitPrise.Web.csproj">
+      <Project>{BC8FED36-9CB8-40F1-828D-AE096F3D37AA}</Project>
+      <Name>GitPrise.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

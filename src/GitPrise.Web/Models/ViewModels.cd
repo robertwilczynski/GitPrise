@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GitPrise.Web.Models.TreeViewModel">
+    <Position X="5.5" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACACAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\TreeViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tree" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GitPrise.Web.Models.BlobViewModel">
+    <Position X="11.5" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BlobViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Blob" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GitPrise.Web.Models.BranchViewModel" Collapsed="true">
+    <Position X="23.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Models\BranchViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.ChangeViewModel" Collapsed="true">
+    <Position X="25.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\ChangeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.CommitsViewModel">
+    <Position X="8.5" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAACBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAII=</HashCode>
+      <FileName>Models\CommitsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.TreeNodeViewModel">
+    <Position X="17.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\CommitViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Node" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GitPrise.Web.Models.MainCommitViewModel">
+    <Position X="20.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\CommitViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tree" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Parents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GitPrise.Web.Models.CommitViewModel">
+    <Position X="14.5" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CommitViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.LineViewModel" Collapsed="true">
+    <Position X="23.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAIAAAAAAAAEAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\DiffSectionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.DiffSectionViewModel" Collapsed="true">
+    <Position X="27" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAA=</HashCode>
+      <FileName>Models\DiffSectionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.ListItemViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAYAgAAAAAQAAAAAAAAAAQAAIAAQAAA=</HashCode>
+      <FileName>Models\ListItemViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GitPrise.Web.Models.PathViewModel" Collapsed="true">
+    <Position X="27" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAACAAAAAQAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PathViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.RepositoriesViewModel" Collapsed="true">
+    <Position X="23.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\RepositoriesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.RepositoryNavigationRequest">
+    <Position X="12.25" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAIAAAAgAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RepositoryNavigationRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitPrise.Web.Models.RepositoryNavigationViewModelBase">
+    <Position X="9.5" Y="4.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AIgAAAAAIAAAAEAAAQAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RepositoryNavigationViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentCommit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GitPrise.Web.Models.RepositoryViewModel" Collapsed="true">
+    <Position X="25.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAIAAQAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RepositoryViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GitSharp.AbstractTreeNode" Collapsed="true">
+    <Position X="6" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GitSharp.Leaf" Collapsed="true">
+    <Position X="7" Y="12.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GitSharp.Tree" Collapsed="true">
+    <Position X="4.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

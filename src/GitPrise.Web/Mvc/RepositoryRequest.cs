@@ -25,6 +25,7 @@ using GitPrise.Core.Configuration;
 using GitPrise.Core.Services;
 using GitPrise.Core.Web.Mvc;
 using GitPrise.Web.Models;
+using GitPrise.Core;
 
 namespace GitPrise.Web.Mvc
 {
@@ -46,7 +47,7 @@ namespace GitPrise.Web.Mvc
             }
 
             if (filterContext.ActionParameters.Count != 1 ||
-                !filterContext.ActionParameters.ContainsKey("request") || 
+                !filterContext.ActionParameters.ContainsKey("request") ||
                 filterContext.ActionParameters["request"].GetType() != typeof(RepositoryNavigationRequest))
             {
                 return;
@@ -69,17 +70,25 @@ namespace GitPrise.Web.Mvc
                 repoLocation = request.RepositoryName;
             }
 
-            controller.Repository = RepositoryResolver.GetRepository(repoLocation);
+            var repository = RepositoryResolver.GetRepository(repoLocation);
+            if (repository == null)
+            {
+                throw new RepositoryNotFoundException(request.RepositoryName)
+                {
+                    RepositoryLocation = repoLocation
+                };
+            }
+            controller.Repository = repository;
 
             request.Treeish = (string)filterContext.RouteData.Values["id"];
             request.Treeish = request.Treeish ?? "master";
             request.Path = (string)filterContext.RouteData.Values["path"];
 
             // Storing data in context for access by Html / Url helpers
-            filterContext.RequestContext.SetRepositoryName(request.RepositoryName);
-            filterContext.RequestContext.SetTreeish(request.Treeish);
-            filterContext.RequestContext.SetRepositoryLocation(request.RepositoryLocation);
-            filterContext.RequestContext.SetPath(request.Path);
+            //filterContext.RequestContext.SetRepositoryName(request.RepositoryName);
+            //filterContext.RequestContext.SetTreeish(request.Treeish);
+            //filterContext.RequestContext.SetRepositoryLocation(request.RepositoryLocation);
+            //filterContext.RequestContext.SetPath(request.Path);
 
             // Each action should expect a request.
             filterContext.ActionParameters["request"] = request;

@@ -22,17 +22,20 @@ using System.IO;
 
 namespace GitPrise.Web.Models
 {
-    public class ChangeViewModel
+    public class ChangeViewModel : RepositoryNavigationRequest
     {
         public Change Change { get; set; }
         public Diff Diff { get; set; }
         public string Name { get; set; }
 
-        public ChangeViewModel(Change change, Diff diff)
+        public ChangeViewModel(RepositoryNavigationRequest request, Change change, Diff diff)
+            : base(request)
         {
             Diff = diff;
             Change = change;
-            Name = Path.GetFileName(change.Path);
+            Treeish = change.ComparedCommit.Hash;
+            Name = System.IO.Path.GetFileName(change.Path);
+            Path = change.Path;
         }
     }
 }

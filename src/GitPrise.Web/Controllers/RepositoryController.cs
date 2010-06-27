@@ -147,7 +147,7 @@ namespace GitPrise.Web.Controllers
             try
             {
                 var commit = Repository.Get<Commit>(request.Treeish);
-                var viewModel = new CommitViewModel(Repository, request, commit)
+                var viewModel = new CommitDetailsViewModel(Repository, request, commit)
                 {
 
                 };
@@ -163,7 +163,7 @@ namespace GitPrise.Web.Controllers
                     // PASTE-END : borrowed from GitSharp.Demo
 
                     var diff = new Diff(a, b);
-                    viewModel.Changes.Add(new ChangeViewModel(change, diff));
+                    viewModel.Changes.Add(new ChangeViewModel(request, change, diff));
                 }
                 
                 return View(viewModel);
@@ -179,7 +179,7 @@ namespace GitPrise.Web.Controllers
         {
             try
             {
-                var viewModel = new CommitsViewModel(Repository, request.RepositoryName, request.Treeish);
+                var viewModel = new CommitsViewModel(Repository, request);
                 var obj = Repository.Get<AbstractObject>(request.Treeish);
                 Commit commit = null;
                 if (obj.IsCommit)

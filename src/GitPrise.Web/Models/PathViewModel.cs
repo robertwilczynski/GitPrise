@@ -44,7 +44,7 @@ namespace GitPrise.Web.Models
         {
             Elements = new List<Element>();
 
-            CurrentItem = new Element(request, repositoryName, id, node);
+            CurrentItem = new Element(new RepositoryNavigationRequest(request) { Path = node.Path }, repositoryName, id, node);
 
             var currentNode = node;
 
@@ -53,7 +53,7 @@ namespace GitPrise.Web.Models
                 currentNode = currentNode.Parent;
                 if (currentNode.Parent != null)
                 {
-                    Elements.Add(new Element(request, repositoryName, id, currentNode));
+                    Elements.Add(new Element(new RepositoryNavigationRequest(request) { Path = currentNode.Path }, repositoryName, id, currentNode));
                 }
             }
 
@@ -65,21 +65,29 @@ namespace GitPrise.Web.Models
         public class Element
         {
             public string Text { get; set; }
-            public string Url { get; set; }
-            public string IsNavigationElement { get; set; }
+            //public string Url { get; set; }
+            //public string IsNavigationElement { get; set; }
+            public RepositoryNavigationRequest Navigation { get; set; }
 
             public Element(RepositoryNavigationRequest request, string repositoryName, string treeish, AbstractTreeNode node)
             {
-                var helper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+                //var helper = new UrlHelper(HttpContext.Current.Request.RequestContext);
 
                 Text = !String.IsNullOrEmpty(node.Name) ? node.Name : repositoryName;
-                Url = helper.Action("tree", "Repository", new
+                Navigation = new RepositoryNavigationRequest
                 {
-                    repositoryName = repositoryName,
-                    id = treeish,
-                    path = node.Path,
-                    location = request.RepositoryLocation,
-                });
+                    RepositoryName = request.RepositoryName,
+                    Path = node.Path,
+                    Treeish = treeish,
+                    RepositoryLocation = request.RepositoryLocation,
+                };
+                //Url = helper.Action("tree", "Repository", new
+                //{
+                //    repositoryName = repositoryName,
+                //    id = treeish,
+                //    path = node.Path,
+                //    location = request.RepositoryLocation,
+                //});
             }
         }
     }

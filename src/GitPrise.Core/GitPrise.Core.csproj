@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,7 +47,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ASP.NET MVC 2\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,6 +64,7 @@
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="GitSharp\CommitHarvester.cs" />
     <Compile Include="GitSharp\GitSharpExtensions.cs" />
+    <Compile Include="RepositoryNotFoundException.cs" />
     <Compile Include="Services\IRepositoryResolver.cs" />
     <Compile Include="Services\RepositoryResolver.cs" />
     <Compile Include="StringExtensions.cs" />
@@ -68,11 +72,9 @@
     <Compile Include="System\CollectionExtensions.cs" />
     <Compile Include="System\StringExtensions.cs" />
     <Compile Include="Web\Mvc\InjectingActionInvoker.cs" />
-    <Compile Include="Web\Mvc\HtmlExtensions.cs" />
     <Compile Include="Web\Mvc\RequestContextExtensionss.cs" />
     <Compile Include="Web\Mvc\UnityControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\Mvc\UrlExtensions.cs" />
     <Compile Include="Web\Mvc\GravatarExtensions.cs" />
     <Compile Include="Web\Utils\Gravatar\GravatarDefault.cs" />
     <Compile Include="Web\Utils\Gravatar\GravatarRating.cs" />

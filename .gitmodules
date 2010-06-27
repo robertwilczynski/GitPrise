@@ -1,0 +1,3 @@
+[submodule "src/Tests/Repositories/Test"]
+	path = src/Tests/Repositories/Test
+	url = git@github.com:robertwilczynski/Test.git

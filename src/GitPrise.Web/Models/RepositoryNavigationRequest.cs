@@ -36,6 +36,23 @@ namespace GitPrise.Web.Models
         /// <summary>Ad hoc repository location.</summary>
         /// <remarks>Used when accessing repository outside of configured location (in git instaweb scenarios).</remarks>
         /// <value>Absolute path to repository. Overrides <see cref="RepositoryName"./></value>
-        public string RepositoryLocation {get; set;}
+        public string RepositoryLocation {get; set; }
+
+        public RepositoryNavigationRequest()
+        {
+            
+        }
+
+        /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        /// <param name="request"></param>
+        public RepositoryNavigationRequest(RepositoryNavigationRequest request)
+        {
+            RepositoryName = request.RepositoryName;
+            Treeish = request.Treeish;
+            Path = request.Path;
+            RepositoryLocation = request.RepositoryLocation;
+        }
     }
 }

@@ -30,19 +30,9 @@ namespace GitPrise.Web.Models
         public List<ListItemViewModel> Items { get; set; }
 
         public TreeViewModel(Repository repository, RepositoryNavigationRequest request, Tree tree)
-            : this(repository,
-                request.RepositoryName,
-                request.Treeish,
-                tree,
-                new PathViewModel(request, tree))
+            : base(repository, request)
         {
-
-        }
-
-        public TreeViewModel(Repository repository, string repositoryName, string treeish, Tree tree, PathViewModel pathModel)
-            : base(repository, repositoryName, treeish)
-        {
-            PathModel = pathModel;
+            PathModel = new PathViewModel(request, tree);
             Tree = tree;
             Path = tree.Path;
             IsRoot = Tree.IsRoot;
