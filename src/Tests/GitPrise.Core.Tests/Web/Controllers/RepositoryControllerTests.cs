@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MbUnit.Framework;
 using GitPrise.Web.Controllers;
 using GitPrise.Core.Configuration;
 using Moq;
 using GitPrise.Core.Services;
 using GitPrise.Core.SyntaxHighlighting;
-using GitPrise.Web.Models;
 using GitSharp;
-using System.Reflection;
-using System.Web.Mvc;
-using MvcContrib.TestHelper;
-using MvcContrib.TestHelper.Ui;
+using GitPrise.Web.Models;
 
 namespace GitPrise.Core.Tests.Web.Controllers
 {
     [TestFixture]
-    class RepositoryControllerTests
+    public partial class RepositoryControllerTests
     {
+        private string _testRepositoryLocation;
         RepositoryController _controller;
 
         [SetUp]
@@ -34,20 +28,22 @@ namespace GitPrise.Core.Tests.Web.Controllers
                 repoResolver.Object,
                 highlightingService.Object);
 
-            _controller.Repository = new Repository(TestUtils.GetAbsolutePathFromRelativeToTestAssembly(@"..\..\..\Repositories\Test"));
+            _testRepositoryLocation = TestUtils.GetAbsolutePathFromRelativeToTestAssembly(@"..\..\..\Repositories\Test");
+            _controller.Repository = new Repository(_testRepositoryLocation);
         }
 
-        [Test]
-        public void Tree_()
+        protected static void AssertRequestIsCopiedToModel(RepositoryNavigationRequest request, RepositoryNavigationRequest model)
         {
-            var result = _controller.Tree(new RepositoryNavigationRequest
-                {
-                    Treeish = "master",
-                    RepositoryName = "Test"
-                });
-            var model = result.AssertViewRendered().WithViewData<TreeViewModel>();
-            Assert.AreEqual("Test", model.CurrentCommit.RepositoryName);
-            Assert.AreEqual(null, model.CurrentCommit.RepositoryLocation);
+            Assert.AreEqual(request.RepositoryName, model.RepositoryName);
+            Assert.AreEqual(request.RepositoryLocation, model.RepositoryLocation);
+            Assert.AreEqual(request.Path, model.Path);
+            Assert.AreEqual(request.Treeish, model.Treeish);
+        }
+       
+        [TearDown]
+        public void TearDown()
+        {
+            _controller.Repository.Dispose();
         }
     }
 }

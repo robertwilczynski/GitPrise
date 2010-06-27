@@ -34,7 +34,6 @@ namespace GitSharp
             AbstractTreeNode node = tree;
             foreach (string part in parts)
             {
-
                 node = (node as Tree).Children.FirstOrDefault(x => ((AbstractTreeNode)x).Name == part) as AbstractTreeNode;
             }
             return node;

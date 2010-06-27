@@ -18,14 +18,13 @@
 
 using System;
 using System.Web;
-using Microsoft.Practices.Unity;
-using System.Web.Mvc;
-using GitPrise.Web.Controllers;
-using GitPrise.Core.Configuration;
-using GitPrise.Core.Services;
-using GitPrise.Core.Web.Mvc;
-using GitPrise.Web.Models;
 using GitPrise.Core;
+using System.Web.Mvc;
+using GitPrise.Web.Models;
+using GitPrise.Core.Services;
+using GitPrise.Web.Controllers;
+using Microsoft.Practices.Unity;
+using GitPrise.Core.Configuration;
 
 namespace GitPrise.Web.Mvc
 {
@@ -40,11 +39,7 @@ namespace GitPrise.Web.Mvc
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            var controller = filterContext.Controller as RepositoryController;
-            if (controller == null)
-            {
-                throw new InvalidOperationException("{0} can only be applied to {1}.".Fill(GetType().Name, typeof(RepositoryController).Name));
-            }
+            RepositoryController controller = GetController(filterContext);
 
             if (filterContext.ActionParameters.Count != 1 ||
                 !filterContext.ActionParameters.ContainsKey("request") ||
@@ -84,14 +79,19 @@ namespace GitPrise.Web.Mvc
             request.Treeish = request.Treeish ?? "master";
             request.Path = (string)filterContext.RouteData.Values["path"];
 
-            // Storing data in context for access by Html / Url helpers
-            //filterContext.RequestContext.SetRepositoryName(request.RepositoryName);
-            //filterContext.RequestContext.SetTreeish(request.Treeish);
-            //filterContext.RequestContext.SetRepositoryLocation(request.RepositoryLocation);
-            //filterContext.RequestContext.SetPath(request.Path);
-
             // Each action should expect a request.
             filterContext.ActionParameters["request"] = request;
+        }
+
+        private RepositoryController GetController(ActionExecutingContext filterContext)
+        {
+            var controller = filterContext.Controller as RepositoryController;
+            if (controller == null)
+            {
+                throw new InvalidOperationException("{0} can only be applied to {1}.".
+                    Fill(GetType().Name, typeof(RepositoryController).Name));
+            }
+            return controller;
         }
     }
 }

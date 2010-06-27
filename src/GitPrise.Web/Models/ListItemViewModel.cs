@@ -20,7 +20,7 @@ using System;
 
 namespace GitPrise.Web.Models
 {
-    public class ListItemViewModel : IComparable
+    public class ListItemViewModel : RepositoryNavigationRequest, IComparable
     {
         public enum ItemType
         {
@@ -32,13 +32,14 @@ namespace GitPrise.Web.Models
         public string Message { get; set; }
         public string Author { get; set; }
         public ItemType Type { get; set; }
-
-        public string Path { get; set; }
-
         public DateTimeOffset? AuthorDate { get; set; }
         public DateTimeOffset? CommitDate { get; set; }
 
-        
+        public ListItemViewModel(RepositoryNavigationRequest request)
+            : base(request)
+        {
+            
+        }
 
         public int CompareTo(object obj)
         {

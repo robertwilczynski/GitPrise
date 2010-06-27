@@ -40,20 +40,23 @@ namespace GitPrise.Web.Models
             Items = new List<ListItemViewModel>();
             foreach (var child in Tree.Children)
             {
-                var type = ListItemViewModel.ItemType.Blob;
+                ListItemViewModel.ItemType type;
                 AbstractTreeNode node = child as AbstractTreeNode;
                 if (child is Leaf)
                 {
-                    var childLeaf = (Leaf)child;
+                    type = ListItemViewModel.ItemType.Blob;
                 }
                 else if (child is Tree)
                 {
-                    var childTree = (Tree)child;
                     type = ListItemViewModel.ItemType.Tree;
                 }
-                //var change = null; // (child as ITreeNode).FindLastCommit(commit);
+                else
+                {
+                    throw new InvalidOperationException("Unexpected child in tree.");
+                }
+
                 Commit lastCommit = null;// node.GetLastCommitBefore(commit);
-                Items.Add(new ListItemViewModel
+                Items.Add(new ListItemViewModel(request)
                 {
                     Name = node.Name,
                     Author = lastCommit != null ? lastCommit.Author.Name : String.Empty,

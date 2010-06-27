@@ -107,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxHighlighting\PygmentsHighlightingServiceTests.cs" />
     <Compile Include="TestUtils.cs" />
+    <Compile Include="Web\Controllers\RepositoryControllerTests.CommitAction.cs" />
+    <Compile Include="Web\Controllers\RepositoryControllerTests.BlobAction.cs" />
+    <Compile Include="Web\Controllers\RepositoryControllerTests.TreeAction.cs" />
     <Compile Include="Web\Controllers\RepositoryControllerTests.cs" />
     <Compile Include="Web\Models\RepositoryNavigationRequestTests.cs" />
   </ItemGroup>

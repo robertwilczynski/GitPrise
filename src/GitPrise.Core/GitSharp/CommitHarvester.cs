@@ -35,7 +35,6 @@ namespace GitPrise.Core.GitSharp
             _minCommits = minCommits;
             _commitTimeTreshold = commitTimeTreshold;
             _root = root;
-
         }
 
         private void Collect(Commit commit)
