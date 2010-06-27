@@ -16,7 +16,7 @@
     }
     #container {
       margin: 0 auto;
-      width: 700px;
+      width: 960px;
     }
 		h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
 		h1 .small { font-size: 0.4em; }
@@ -29,6 +29,7 @@
 		pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+	
 	</style>
 	
 </head>
@@ -46,13 +47,18 @@
     </div>
 
     <h1><a href="http://github.com/robertwilczynski/GitPrise">GitPrise</a>
-      <span class="small">by <a href="http://github.com/robertwilczynski">robertwilczynski</a></span></h1>
+      <span class="small">by <a href="http://github.com/robertwilczynski">Robert Wilczynski</a></span></h1>
 
     <div class="description">
       asp.net mvc git repository browser
     </div>
 
-    
+    <div id="galleria">
+        <img src="static/img/scr/01.jpg" />
+		<img src="static/img/scr/02.jpg" />
+		<img src="static/img/scr/03.jpg" />
+		<img src="static/img/scr/04.jpg" />
+    </div>    
 
     <h2>Download</h2>
     <p>
@@ -71,6 +77,13 @@
 
   </div>
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="static/galleria/galleria.js"></script>
+  <script type="text/javascript">
+    //Galleria.loadTheme('static/galleria/themes/dots/galleria.dots.js');    
+	Galleria.loadTheme('static/galleria/themes/classic/galleria.classic.js');
+    $('#galleria').galleria({ height: 800 });
+  </script>
   
 </body>
 </html>
