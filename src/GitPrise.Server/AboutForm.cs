@@ -26,7 +26,8 @@ namespace GitPrise.Server
         public AboutForm()
         {
             InitializeComponent();
-            txtAbout.Text = @"Using icons from : http://pixel-mixer.com/";
+            txtAbout.Text = @"Using icon(s) from: http://pixel-mixer.com/
+Build in server provided by: http://cassinidev.codeplex.com/ (http://cassinidev.codeplex.com/license)";
         }
     }
 }

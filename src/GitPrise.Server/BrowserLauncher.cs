@@ -23,12 +23,30 @@ namespace GitPrise.Server
 {
     class BrowserLauncher
     {
-        public static void Launch(int port, string repositoryName, string repositoryPath)
+        private int _port;
+        private string _repositoryName;
+        private string _repositoryPath;
+
+        public BrowserLauncher(int port, string repositoryName, string repositoryPath)
+        {
+            _repositoryPath = repositoryPath;
+            _repositoryName = repositoryName;
+            _port = port;            
+        }
+
+        public void Launch()
         {
             var browserProcessInfo = new ProcessStartInfo(
                 String.Format(@"http://localhost:{0}/{1}?location={2}", 
-                    port, repositoryName, repositoryPath));
+                    _port, _repositoryName, _repositoryPath));
+
             Process.Start(browserProcessInfo);
+        }
+
+        public void LaunchAtRoot()
+        {
+            Process.Start(new ProcessStartInfo(
+                String.Format(@"http://localhost:{0}", _port)));
         }
     }
 }

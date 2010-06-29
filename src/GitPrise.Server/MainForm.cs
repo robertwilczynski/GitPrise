@@ -24,20 +24,30 @@ namespace GitPrise.Server
 {
     public partial class MainForm : Form
     {
-        private static CassiniDevServer _server;
-        private Arguments _arguments;
+        private readonly CassiniDevServer _server;
+        private readonly Arguments _arguments;
+        private readonly BrowserLauncher _launcher;
+
+        private bool _isShutdownInProgress;
 
         public MainForm(Arguments arguments)
         {
             _arguments = arguments;
             InitializeComponent();
+            
+            txtApplicationPath.Text = arguments.ApplicationPath;
+            txtPort.Text = arguments.Port.ToString();
+            
             _server = new CassiniDevServer();
             _server.StartServer(arguments.ApplicationPath, arguments.Port, arguments.VirtualDirectory, arguments.HostName);
+            
             notifyIcon.ShowBalloonTip(
                 3000, 
                 "GitPrise Web Server", 
                 string.Format("Server running on port {0}.", arguments.Port), 
                 ToolTipIcon.Info);
+
+            _launcher = new BrowserLauncher(arguments.Port, arguments.RepositoryName, arguments.RepositoryPath);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -45,7 +55,7 @@ namespace GitPrise.Server
             base.OnLoad(e);
             if (_arguments.StartBrowser)
             {
-                BrowserLauncher.Launch(_arguments.Port, _arguments.RepositoryName, _arguments.RepositoryPath);
+                _launcher.Launch();
             }
         }
 
@@ -70,19 +80,17 @@ namespace GitPrise.Server
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            WindowState = FormWindowState.Minimized;
-            e.Cancel = true;
-        }
 
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            base.OnFormClosed(e);
-            _server.StopServer();
+            if (!_isShutdownInProgress)
+            {
+                WindowState = FormWindowState.Minimized;
+                e.Cancel = true;
+            }
         }
-
+        
         private void btnStop_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Stop();
         }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
@@ -105,8 +113,34 @@ namespace GitPrise.Server
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Stop();
+        }
+
+        private void lnkStartAtRoot_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            _launcher.Launch();
+        }
+
+        private void lnkStartAtLocation_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            _launcher.LaunchAtRoot();
+        }
+
+        private void Stop()
+        {
+            _isShutdownInProgress = true;
+            _server.StopServer();
             Application.Exit();
         }
 
+        private void startBrowserAtRootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _launcher.LaunchAtRoot();
+        }
+
+        private void startBrowserAtOriginalLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _launcher.Launch();
+        }
     }
 }

@@ -52,10 +52,10 @@ namespace GitPrise.Server
             // txtAbout
             // 
             this.txtAbout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAbout.Enabled = false;
             this.txtAbout.Location = new System.Drawing.Point(0, 0);
             this.txtAbout.Multiline = true;
             this.txtAbout.Name = "txtAbout";
+            this.txtAbout.ReadOnly = true;
             this.txtAbout.Size = new System.Drawing.Size(430, 278);
             this.txtAbout.TabIndex = 0;
             // 

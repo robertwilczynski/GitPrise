@@ -99,6 +99,7 @@ namespace GitPrise.Server
             }
             return false;
         }
+
         static void ShowHelp(OptionSet p)
         {
             Console.WriteLine("Usage: GitPrise.Server [OPTIONS]");
