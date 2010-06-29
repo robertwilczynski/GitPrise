@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CassiniDev4-lib">
+      <HintPath>..\..\lib\CassiniDev4.Lib\CassiniDev4-lib.dll</HintPath>
+    </Reference>
     <Reference Include="GitSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\GitSharp\GitSharp.dll</HintPath>
@@ -65,6 +68,8 @@
     <Compile Include="GitSharp\CommitHarvester.cs" />
     <Compile Include="GitSharp\GitSharpExtensions.cs" />
     <Compile Include="RepositoryNotFoundException.cs" />
+    <Compile Include="Server\AvailabilityResult.cs" />
+    <Compile Include="Server\GitPriseWebServer.cs" />
     <Compile Include="Services\IRepositoryResolver.cs" />
     <Compile Include="Services\RepositoryResolver.cs" />
     <Compile Include="StringExtensions.cs" />
