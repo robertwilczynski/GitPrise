@@ -51,15 +51,22 @@ namespace GitPrise.Core.Server
             try
             {
                 var response = request.GetResponse();
-                using (var reader = new StreamReader(response.GetResponseStream()))
+                try
                 {
-                    var responseContent = reader.ReadToEnd();
-                    if (responseContent != "GitPrise OK")
+                    using (var reader = new StreamReader(response.GetResponseStream()))
                     {
-                        return AvailabilityResult.Unknown;
+                        var responseContent = reader.ReadToEnd();
+                        if (responseContent != "GitPrise OK")
+                        {
+                            return AvailabilityResult.Unknown;
+                        }
+                        return AvailabilityResult.InUseByGitPrise;
                     }
-                    return AvailabilityResult.InUseByGitPrise;
                 }
+                finally
+                {
+                    response.Close();    
+                }                
             }
             catch (WebException ex)
             {
