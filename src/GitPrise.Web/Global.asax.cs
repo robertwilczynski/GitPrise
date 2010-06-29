@@ -38,21 +38,27 @@ namespace GitPrise.Web
             );
 
             routes.MapRoute(
-                "RepositoryShort", // Route name
-                "{repositoryName}", // URL with parameters
-                new { controller = "Repository", action = "Details"} // Parameter defaults
+                "status", 
+                "status",
+                new { controller = "Home", action = "Status", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
-                "Repository", // Route name
-                "{repositoryName}/{action}/{id}/{*path}", // URL with parameters
-                new { controller = "Repository", action = "Details", id = UrlParameter.Optional, path = UrlParameter.Optional } // Parameter defaults
+                "RepositoryShort",
+                "{repositoryName}",
+                new { controller = "Repository", action = "Details"}
             );
 
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                "Repository",
+                "{repositoryName}/{action}/{id}/{*path}",
+                new { controller = "Repository", action = "Details", id = UrlParameter.Optional, path = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
 

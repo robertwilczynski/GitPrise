@@ -21,6 +21,8 @@ using System.Windows.Forms;
 using NDesk.Options;
 using System.Configuration;
 using System.IO;
+using System.Net.Sockets;
+using System.Net;
 
 namespace GitPrise.Server
 {
@@ -62,10 +64,47 @@ namespace GitPrise.Server
                 ShowHelp(p);
                 return;
             }
+            var launcher = new BrowserLauncher(arguments.Port, arguments.RepositoryName, arguments.RepositoryPath);
+
+            if (IsServerRunning(arguments))
+            {
+                launcher.Launch();
+                return;
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(arguments));
+            Application.Run(new MainForm(arguments, launcher));
+        }
+
+        private static bool IsServerRunning(Arguments arguments)
+        {
+            var url = String.Format(@"http://localhost:{0}/status", arguments.Port);
+            var request = WebRequest.Create(url);
+            try
+            {
+                var response = request.GetResponse();
+                using (var reader = new StreamReader(response.GetResponseStream()))
+                {
+                    var responseContent = reader.ReadToEnd();
+                    if (responseContent != "GitPrise OK")
+                    {
+                        throw new InvalidOperationException(string.Format(
+                            "Something seems to be already listening on port {0}.", 
+                            arguments.Port));
+                    }
+                    return true;
+                }
+            }
+            catch (WebException ex)
+            {
+                // not started
+                if (ex.Status == WebExceptionStatus.ConnectFailure)
+                {
+                    return false;
+                }
+                throw;
+            }            
         }
 
         private static bool ArgumentsAreInvalid(Arguments arguments)

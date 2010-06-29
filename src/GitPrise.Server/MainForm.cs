@@ -30,9 +30,11 @@ namespace GitPrise.Server
 
         private bool _isShutdownInProgress;
 
-        public MainForm(Arguments arguments)
+        public MainForm(Arguments arguments, BrowserLauncher launcher)
         {
             _arguments = arguments;
+            _launcher = launcher;
+
             InitializeComponent();
             
             txtApplicationPath.Text = arguments.ApplicationPath;
@@ -46,8 +48,6 @@ namespace GitPrise.Server
                 "GitPrise Web Server", 
                 string.Format("Server running on port {0}.", arguments.Port), 
                 ToolTipIcon.Info);
-
-            _launcher = new BrowserLauncher(arguments.Port, arguments.RepositoryName, arguments.RepositoryPath);
         }
 
         protected override void OnLoad(EventArgs e)

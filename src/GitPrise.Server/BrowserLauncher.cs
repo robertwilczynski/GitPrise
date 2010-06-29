@@ -21,7 +21,7 @@ using System.Diagnostics;
 
 namespace GitPrise.Server
 {
-    class BrowserLauncher
+    public class BrowserLauncher
     {
         private int _port;
         private string _repositoryName;

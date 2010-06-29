@@ -78,5 +78,10 @@ namespace GitPrise.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Status()
+        {
+            return Content("GitPrise OK");
+        }
     }
 }
