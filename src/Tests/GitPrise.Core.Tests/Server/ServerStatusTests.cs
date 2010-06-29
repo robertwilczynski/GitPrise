@@ -17,13 +17,8 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MbUnit.Framework;
 using GitPrise.Core.Server;
-using System.Net.Sockets;
-using System.Net;
 using System.Reflection;
 using System.IO;
 
@@ -60,27 +55,5 @@ namespace GitPrise.Core.Tests.Server
                 server.Stop();
             }
         }
-        
-        // Must be doing something wrong here
-        //[Test]
-        //public void WhenPortIsTaken_CheckPortAvailability_ReturnsUnknown()
-        //{
-        //    var listener = new TcpListener(IPAddress.Any, KnownPort);
-        //    listener.Start();
-        //    listener.BeginAcceptSocket(x => 
-        //    {
-        //        var socket = listener.EndAcceptSocket(x);
-        //        var buffer = new byte[1024];
-
-        //        while (socket.Receive(buffer) > 0)
-        //        {
-        //        	
-        //        }
-        //        socket.Send(Encoding.UTF8.GetBytes("x"));
-        //        socket.Close();
-        //    }, null);
-        //    var result = GitPriseWebServer.CheckPortAvailability(KnownPort);
-        //    Assert.AreEqual(AvailabilityResult.InUseByGitPrise, result);
-        //}
     }
 }
