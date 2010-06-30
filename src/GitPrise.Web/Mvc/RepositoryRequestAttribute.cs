@@ -28,7 +28,7 @@ using GitPrise.Core.Configuration;
 
 namespace GitPrise.Web.Mvc
 {
-    public class RepositoryRequest : ActionFilterAttribute
+    public class RepositoryRequestAttribute : ActionFilterAttribute
     {
         [Dependency]
         public ISettingsProvider ConfigurationProvider { get; set; }
@@ -54,7 +54,7 @@ namespace GitPrise.Web.Mvc
                 RepositoryName = filterContext.RouteData.GetRequiredString("repositoryName")
             };
 
-            var repoLocation = (string)filterContext.RequestContext.HttpContext.Request.QueryString["location"];
+            var repoLocation = (string)filterContext.HttpContext.Request.QueryString["location"];
             if (!String.IsNullOrEmpty(repoLocation))
             {
                 repoLocation = HttpUtility.UrlDecode(repoLocation);

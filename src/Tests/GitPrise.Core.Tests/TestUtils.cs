@@ -30,5 +30,10 @@ namespace GitPrise.Core.Tests
             var codeBase = uri.AbsolutePath;
             return Path.Combine(Path.GetDirectoryName(codeBase), path);
         }
+
+        public static string GetRepositoryPath(string name)
+        {
+            return TestUtils.GetAbsolutePathFromRelativeToTestAssembly(Path.Combine(@"..\..\..\Repositories\", name));
+        }
     }
 }

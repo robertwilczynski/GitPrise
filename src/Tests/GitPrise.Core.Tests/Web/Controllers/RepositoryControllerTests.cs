@@ -46,7 +46,7 @@ namespace GitPrise.Core.Tests.Web.Controllers
                 repoResolver.Object,
                 highlightingService.Object);
 
-            _testRepositoryLocation = TestUtils.GetAbsolutePathFromRelativeToTestAssembly(@"..\..\..\Repositories\Test");
+            _testRepositoryLocation = TestUtils.GetRepositoryPath("Test");
             _controller.Repository = new Repository(_testRepositoryLocation);
         }
 

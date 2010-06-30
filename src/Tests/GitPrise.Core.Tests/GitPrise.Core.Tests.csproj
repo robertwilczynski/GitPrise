@@ -93,10 +93,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\ASP.NET MVC 2\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -112,7 +115,12 @@
     <Compile Include="Web\Controllers\RepositoryControllerTests.BlobAction.cs" />
     <Compile Include="Web\Controllers\RepositoryControllerTests.TreeAction.cs" />
     <Compile Include="Web\Controllers\RepositoryControllerTests.cs" />
+    <Compile Include="Web\HttpContextMock.cs" />
+    <Compile Include="Web\HttpRequestMock.cs" />
+    <Compile Include="Web\HttpResponseMock.cs" />
     <Compile Include="Web\Models\RepositoryNavigationRequestTests.cs" />
+    <Compile Include="Web\RepositoryRequestAttributeTests.cs" />
+    <Compile Include="Web\RequestContextMock.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GitPrise.Core\GitPrise.Core.csproj">

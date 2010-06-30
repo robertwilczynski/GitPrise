@@ -108,7 +108,7 @@
     <Compile Include="Models\TreeNodeViewModel.cs" />
     <Compile Include="Models\TreeViewModel.cs" />
     <Compile Include="Mvc\Html\HtmlExtensions.cs" />
-    <Compile Include="Mvc\RepositoryRequest.cs" />
+    <Compile Include="Mvc\RepositoryRequestAttribute.cs" />
     <Compile Include="Mvc\UrlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
