@@ -35,20 +35,16 @@ namespace GitPrise.Web.Mvc.Html
             string mnemonic = null;
             string cssClass = null;
 
-            switch (line.EditType)
+            switch (line.LineType)
             {
-                case Diff.EditType.Unchanged:
+                case LineType.Unchanged:
                     mnemonic = "&nbsp;";
                     break;
-                case Diff.EditType.Inserted:
+                case LineType.Inserted:
                     mnemonic =  "+";
                     cssClass = "di";
                     break;
-                case Diff.EditType.Deleted:
-                    mnemonic =  "-";
-                    cssClass = "dd";
-                    break;
-                case Diff.EditType.Replaced:
+                case LineType.Removed:
                     mnemonic =  "-";
                     cssClass = "dd";
                     break;

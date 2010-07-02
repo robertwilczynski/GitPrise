@@ -24,29 +24,13 @@ using System.Linq;
 
 namespace GitPrise.Web.Models
 {
-    public class LineViewModel
-    {
-        public int? LineA { get; set; }
-        public int? LineB { get; set; }
-        public string Text { get; set; }
-        public Diff.EditType EditType { get; set; }
-
-        public LineViewModel(int? lineA, int? lineB, string text, Diff.EditType editType)
-        {
-            EditType = editType;
-            LineA = lineA;
-            LineB = lineB;
-            Text = text;
-        }
-    }
-
     public class DiffSectionViewModel
     {
         public List<LineViewModel> Lines { get; set; }
 
-        private void AddLine(int? lineA, int? lineB, string text, Diff.EditType editType)
+        private void AddLine(int? lineA, int? lineB, string text, LineType lineType)
         {
-            Lines.Add(new LineViewModel(lineA, lineB, text, editType));
+            Lines.Add(new LineViewModel(lineA, lineB, text, lineType));
         }
 
         private void ForEachLine(string text, Action<int, string> action)
@@ -62,32 +46,48 @@ namespace GitPrise.Web.Models
                 }
             }
         }
-
+        
         public DiffSectionViewModel(Diff.Section section)
         {
             Lines = new List<LineViewModel>();
 
-            if (section.EditWithRespectToA == Diff.EditType.Unchanged)
-            {
-                ForEachLine(section.TextA, (idx, line) =>
-                    AddLine(section.BeginA + idx, section.BeginB + idx, line, section.EditWithRespectToA));
-            }
-            else
-            {
-                //var change = section.EditWithRespectToB;
-                ForEachLine(section.TextA, (idx, line) =>
-                    AddLine(section.BeginA + idx, null, line, section.EditWithRespectToB));
+            var lineType = GetLineType(section.EditWithRespectToA);
+            ForEachLine(section.TextA, (idx, line) =>
+                AddLine(section.BeginA + idx, null, line, lineType));
 
-                var change = section.EditWithRespectToA;
-                if (change == Diff.EditType.Replaced)
+            if (section.EditWithRespectToA != Diff.EditType.Unchanged)
+            {
+                if (section.EditWithRespectToA == Diff.EditType.Replaced)
                 {
-                    change = Diff.EditType.Inserted;
+                    lineType = LineType.Inserted;
                 }
                 ForEachLine(section.TextB, (idx, line) =>
-                    AddLine(null, section.BeginB + idx, line, change));
+                    AddLine(null, section.BeginB + idx, line, lineType));
             }
 
+
             Lines.OrderBy(x => x.LineA);
+        }
+
+        private static LineType GetLineType(Diff.EditType editType)
+        {
+            var lineType = LineType.Unchanged;
+            switch (editType)
+            {
+                case Diff.EditType.Unchanged:
+                    lineType = LineType.Unchanged;
+                    break;
+                case Diff.EditType.Inserted:
+                    lineType = LineType.Inserted;
+                    break;
+                case Diff.EditType.Deleted:
+                    lineType = LineType.Removed;
+                    break;
+                case Diff.EditType.Replaced:
+                    lineType = LineType.Removed;
+                    break;
+            }
+            return lineType;
         }
     }
 }

@@ -17,24 +17,22 @@
 #endregion
 
 using System;
-using GitSharp;
 
 namespace GitPrise.Web.Models
 {
-    public class ChangeViewModel : RepositoryNavigationRequest
+    public class LineViewModel
     {
-        public Change Change { get; private set; }
-        public DiffViewModel Diff { get; private set; }
-        public string Name { get; private set; }
+        public int? LineA { get; set; }
+        public int? LineB { get; set; }
+        public string Text { get; set; }
+        public LineType LineType { get; set; }
 
-        public ChangeViewModel(RepositoryNavigationRequest request, Change change, Diff diff)
-            : base(request)
+        public LineViewModel(int? lineA, int? lineB, string text, LineType lineType)
         {
-            Change = change;
-            Treeish = change.ComparedCommit.Hash;
-            Name = System.IO.Path.GetFileName(change.Path);
-            Path = change.Path;
-            Diff = new DiffViewModel(diff);
+            LineType = lineType;
+            LineA = lineA;
+            LineB = lineB;
+            Text = text;
         }
     }
 }
