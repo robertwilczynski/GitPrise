@@ -2,7 +2,6 @@
     MasterPageFile="RepositoryBase.Master" %>
 
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">
-    <%: Model.Title %>
     <asp:ContentPlaceHolder ID="TitleContent" runat="server">
     </asp:ContentPlaceHolder>
 </asp:Content>
