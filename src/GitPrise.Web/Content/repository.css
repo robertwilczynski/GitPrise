@@ -349,8 +349,19 @@ colors from diff merge
 
 .dd
 {
-	background-color: #F9EFF0;
+	background-color: #FADEDE;
 }
+
+.di span
+{
+	background-color: #AAFFAA;
+}
+
+.dd span
+{
+	background-color: #FFAAAA;
+}
+
 
 
 table.code
@@ -375,7 +386,8 @@ table.code td.line
 	padding-right: 5px;
 	border-right: 1px solid #ccc;
 	background-color: #efefef;
-	
+	min-width: 20px;
+	text-align: right;
 }
 
 td.squash

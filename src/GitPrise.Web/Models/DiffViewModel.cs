@@ -65,10 +65,10 @@ namespace GitPrise.Web.Models
             {
                 // change found
                 var currentLine = Lines[i];
-                if (currentLine.LineType != LineType.Unchanged)
+                if (currentLine.LineType != Diff.EditType.Unchanged)
                 {
                     // previous line was unchanged - adding wrapper
-                    if (i > 0 && Lines[i - 1].LineType == LineType.Unchanged)
+                    if (i > 0 && Lines[i - 1].LineType == Diff.EditType.Unchanged)
                     {
                         // taking unchangedWrappingLines before first changed line
                         var firstWrappingLine = Math.Max(0, i - unchangedWrappingLines);

@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using GitSharp;
 
 namespace GitPrise.Web.Models
 {
@@ -25,9 +26,9 @@ namespace GitPrise.Web.Models
         public int? LineA { get; set; }
         public int? LineB { get; set; }
         public string Text { get; set; }
-        public LineType LineType { get; set; }
+        public Diff.EditType LineType { get; set; }
 
-        public LineViewModel(int? lineA, int? lineB, string text, LineType lineType)
+        public LineViewModel(int? lineA, int? lineB, string text, Diff.EditType lineType)
         {
             LineType = lineType;
             LineA = lineA;

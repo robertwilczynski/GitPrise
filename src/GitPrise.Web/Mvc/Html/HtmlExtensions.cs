@@ -31,29 +31,51 @@ namespace GitPrise.Web.Mvc.Html
         public static string DiffLine(this HtmlHelper helper, LineViewModel line)
         {
             var builder = new TagBuilder("pre");
-            
+
             string mnemonic = null;
             string cssClass = null;
 
             switch (line.LineType)
             {
-                case LineType.Unchanged:
+                case Diff.EditType.Unchanged:
                     mnemonic = "&nbsp;";
                     break;
-                case LineType.Inserted:
-                    mnemonic =  "+";
+                case Diff.EditType.Inserted:
+                    mnemonic = "+";
                     cssClass = "di";
                     break;
-                case LineType.Removed:
-                    mnemonic =  "-";
+                case Diff.EditType.Deleted:
+                    mnemonic = "-";
                     cssClass = "dd";
                     break;
+                case Diff.EditType.Replaced:
+                    if (line.LineA.HasValue)
+                    {
+                        mnemonic = "-";
+                        cssClass = "dd";
+                    }
+                    else if (line.LineB.HasValue)
+                    {
+                        mnemonic = "+";
+                        cssClass = "di";
+                    }
+                    break;
             }
+
+            
+
             if (cssClass != null)
             {
                 builder.AddCssClass(cssClass);
             }
-            builder.InnerHtml = mnemonic + helper.Encode(line.Text);
+
+            var innerHtml = helper.Encode(line.Text);
+            if (line.LineType == Diff.EditType.Replaced)
+            {
+                innerHtml = String.Format("<span>{0}</span>", innerHtml);
+            }
+
+            builder.InnerHtml = mnemonic + innerHtml;
 
             return builder.ToString();
         }

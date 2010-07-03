@@ -28,7 +28,7 @@ namespace GitPrise.Web.Models
     {
         public List<LineViewModel> Lines { get; set; }
 
-        private void AddLine(int? lineA, int? lineB, string text, LineType lineType)
+        private void AddLine(int? lineA, int? lineB, string text, Diff.EditType lineType)
         {
             Lines.Add(new LineViewModel(lineA, lineB, text, lineType));
         }
@@ -51,18 +51,13 @@ namespace GitPrise.Web.Models
         {
             Lines = new List<LineViewModel>();
 
-            var lineType = GetLineType(section.EditWithRespectToA);
             ForEachLine(section.TextA, (idx, line) =>
-                AddLine(section.BeginA + idx, null, line, lineType));
+                AddLine(section.BeginA + idx, null, line, section.EditWithRespectToA));
 
             if (section.EditWithRespectToA != Diff.EditType.Unchanged)
             {
-                if (section.EditWithRespectToA == Diff.EditType.Replaced)
-                {
-                    lineType = LineType.Inserted;
-                }
                 ForEachLine(section.TextB, (idx, line) =>
-                    AddLine(null, section.BeginB + idx, line, lineType));
+                    AddLine(null, section.BeginB + idx, line, section.EditWithRespectToB));
             }
         }
 
