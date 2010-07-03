@@ -21,14 +21,13 @@ using System.Web.Mvc;
 using GitPrise.Web.Models;
 using GitSharp;
 using System.Web.Routing;
-using GitPrise.Core.Web.Mvc;
 
 namespace GitPrise.Web.Mvc.Html
 {
     public static class HtmlExtensions
     {
 
-        public static string DiffLine(this HtmlHelper helper, LineViewModel line)
+        public static string DiffLine(this HtmlHelper helper, UnifiedDiffViewModel.Line line)
         {
             var builder = new TagBuilder("pre");
 

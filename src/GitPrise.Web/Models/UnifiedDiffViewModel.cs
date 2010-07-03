@@ -20,30 +20,31 @@ using System;
 using System.Collections.Generic;
 using GitSharp;
 using System.Linq;
+using System.IO;
 
 namespace GitPrise.Web.Models
 {
-    public class DiffViewModel
+    public class UnifiedDiffViewModel
     {
-        public List<LineViewModel> Lines { get; private set; }
+        public List<Line> Lines { get; private set; }
 
-        public DiffViewModel()
+        public UnifiedDiffViewModel()
         {
-            Lines = new List<LineViewModel>();
+            Lines = new List<Line>();
         }
 
-        private DiffViewModel(DiffViewModel other)
+        private UnifiedDiffViewModel(UnifiedDiffViewModel other)
             : this()
         {
             Lines.AddRange(other.Lines);
         }
 
-        public DiffViewModel(Diff diff)
+        public UnifiedDiffViewModel(Diff diff)
             : this()
         {
             foreach (var section in diff.Sections)
             {
-                Lines.AddRange(new DiffSectionViewModel(section).Lines);
+                Lines.AddRange(GetLinesFromSection(section));
             }
         }
 
@@ -52,13 +53,13 @@ namespace GitPrise.Web.Models
         /// squashed into a single ellipsis line.
         /// </summary>
         /// <returns></returns>
-        public DiffViewModel GetCompactedDiff()
+        public UnifiedDiffViewModel GetCompactedDiff()
         {
-            var model = new DiffViewModel();
+            var model = new UnifiedDiffViewModel();
             // number of unchanged lines around the change that should be kept.
             const int unchangedWrappingLines = 3;
             var lastLineAdded = -1;
-            var lines = new List<LineViewModel>();
+            var lines = new List<Line>();
             // number of lines left to append when the changed section is left.
             var postChangeWrapperLinesLeft = 0;
             for (int i = 0; i < Lines.Count; i++)
@@ -99,5 +100,50 @@ namespace GitPrise.Web.Models
             return model;
         }
 
+        private void ForEachLine(string text, Action<int, string> action)
+        {
+            using (var reader = new StringReader(text))
+            {
+                int lineNumber = 0;
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    action(lineNumber, line);
+                    lineNumber += 1;
+                }
+            }
+        }
+        
+        private List<Line> GetLinesFromSection(Diff.Section section)
+        {
+            var lines = new List<Line>();
+
+            ForEachLine(section.TextA, (idx, line) =>
+                lines.Add(new Line(section.BeginA + idx, null, line, section.EditWithRespectToA)));
+
+            if (section.EditWithRespectToA != Diff.EditType.Unchanged)
+            {
+                ForEachLine(section.TextB, (idx, line) =>
+                    lines.Add(new Line(null, section.BeginB + idx, line, section.EditWithRespectToB)));
+            }
+
+            return lines;
+        }
+
+        public class Line
+        {
+            public int? LineA { get; set; }
+            public int? LineB { get; set; }
+            public string Text { get; set; }
+            public Diff.EditType LineType { get; set; }
+
+            public Line(int? lineA, int? lineB, string text, Diff.EditType lineType)
+            {
+                LineType = lineType;
+                LineA = lineA;
+                LineB = lineB;
+                Text = text;
+            }
+        }
     }
 }

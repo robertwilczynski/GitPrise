@@ -90,10 +90,8 @@
     <Compile Include="Models\ChangeViewModel.cs" />
     <Compile Include="Models\CommitsViewModel.cs" />
     <Compile Include="Models\CommitDetailsViewModel.cs" />
-    <Compile Include="Models\DiffSectionViewModel.cs" />
-    <Compile Include="Models\DiffViewModel.cs" />
+    <Compile Include="Models\UnifiedDiffViewModel.cs" />
     <Compile Include="Models\LineType.cs" />
-    <Compile Include="Models\LineViewModel.cs" />
     <Compile Include="Models\ListItemViewModel.cs" />
     <Compile Include="Models\MainCommitViewModel.cs" />
     <Compile Include="Models\PathViewModel.cs" />

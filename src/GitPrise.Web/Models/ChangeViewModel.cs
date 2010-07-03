@@ -24,7 +24,7 @@ namespace GitPrise.Web.Models
     public class ChangeViewModel : RepositoryNavigationRequest
     {
         public Change Change { get; private set; }
-        public DiffViewModel Diff { get; private set; }
+        public UnifiedDiffViewModel Diff { get; private set; }
         public string Name { get; private set; }
 
         public ChangeViewModel(RepositoryNavigationRequest request, Change change, Diff diff)
@@ -34,7 +34,7 @@ namespace GitPrise.Web.Models
             Treeish = change.ComparedCommit.Hash;
             Name = System.IO.Path.GetFileName(change.Path);
             Path = change.Path;
-            Diff = new DiffViewModel(diff);
+            Diff = new UnifiedDiffViewModel(diff);
         }
     }
 }
