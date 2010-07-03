@@ -18,7 +18,6 @@
 
 using System;
 using System.Windows.Forms;
-using CassiniDev;
 using GitPrise.Core.Server;
 
 namespace GitPrise.Server
@@ -41,8 +40,8 @@ namespace GitPrise.Server
             txtApplicationPath.Text = arguments.ApplicationPath;
             txtPort.Text = arguments.Port.ToString();
 
-            _server = new GitPriseWebServer(arguments.Port, arguments.ApplicationPath);
-            _server.Start();
+            _server = new GitPriseWebServer();
+            _server.StartServer(arguments.ApplicationPath, arguments.Port);
             
             notifyIcon.ShowBalloonTip(
                 3000, 
@@ -132,7 +131,7 @@ namespace GitPrise.Server
             _isShutdownInProgress = true;
             try
             {
-                _server.Stop();
+                _server.StopServer();
             }
             finally
             {

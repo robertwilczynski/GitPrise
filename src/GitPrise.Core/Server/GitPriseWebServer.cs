@@ -16,33 +16,116 @@
 
 #endregion
 
+#region Original license
+
+// /* **********************************************************************************
+//  *
+//  * Copyright (c) Sky Sanders. All rights reserved.
+//  * 
+//  * This source code is subject to terms and conditions of the Microsoft Public
+//  * License (Ms-PL). A copy of the license can be found in the license.htm file
+//  * included in this distribution.
+//  *
+//  * You must not remove this notice, or any other, from this software.
+//  *
+//  * **********************************************************************************/
+
+#endregion
+
 using System;
 using CassiniDev;
 using System.Net;
 using System.IO;
+using System.Globalization;
 
 namespace GitPrise.Core.Server
 {
     /// <summary>
     /// Hosts GitPrise web application.
     /// </summary>
+    /// <remarks>
+    /// Code taken from CassiniDev as theyit wrapper doesn't expose CassiniDev.Server needed to disable timeout
+    /// after which hosted application is shut down.
+    /// </remarks>
     public class GitPriseWebServer : IDisposable
     {
-        private readonly CassiniDevServer _server;
-        private readonly int _port;
-        private readonly string _webApplication;
 
-        public GitPriseWebServer(int port, string webApplication)
+        // Fields
+        private CassiniDev.Server _server;
+
+        // Methods
+        public void Dispose()
         {
-            _webApplication = webApplication;
-            _port = port;
-            _server = new CassiniDevServer();
+            if (this._server != null)
+            {
+                this.StopServer();
+                this._server.Dispose();
+                this._server = null;
+            }
         }
 
-        public void Start()
+        public string NormalizeUrl(string relativeUrl)
         {
-            _server.StartServer(_webApplication, _port, "/", string.Empty);
+            return CassiniNetworkUtils.NormalizeUrl(this.RootUrl, relativeUrl);
         }
+
+        public void StartServer(string applicationPath)
+        {
+            this.StartServer(applicationPath, CassiniNetworkUtils.GetAvailablePort(0x1f40, 0x2710, IPAddress.Loopback, true), "/", "localhost");
+        }
+
+        public void StartServer(string applicationPath, int port)
+        {
+            StartServer(applicationPath, port, "/", string.Empty);
+        }
+
+        public void StartServer(string applicationPath, int port, string virtualPath, string hostName)
+        {
+            IPAddress loopback = IPAddress.Loopback;
+            if (!CassiniNetworkUtils.IsPortAvailable(loopback, port))
+            {
+                throw new Exception(string.Format("Port {0} is in use.", port));
+            }
+            applicationPath = Path.GetFullPath(applicationPath);
+            virtualPath = string.Format("/{0}/", (virtualPath ?? string.Empty).Trim(new char[] { '/' })).Replace("//", "/");
+            hostName = string.IsNullOrEmpty(hostName) ? "localhost" : hostName;
+            this.StartServer(applicationPath, loopback, port, virtualPath, hostName);
+        }
+
+        public void StartServer(string applicationPath, IPAddress ipAddress, int port, string virtualPath, string hostname)
+        {
+            if (this._server != null)
+            {
+                throw new InvalidOperationException("Server already started");
+            }
+            this._server = new CassiniDev.Server(port, virtualPath, applicationPath, ipAddress, hostname, Int32.MaxValue);
+            try
+            {
+                this._server.Start();
+            }
+            catch (Exception exception)
+            {
+                throw new InvalidOperationException("Error starting server instance.", exception);
+            }
+        }
+
+        public void StopServer()
+        {
+            if (this._server != null)
+            {
+                this._server.ShutDown();
+            }
+        }
+
+        // Properties
+        public string RootUrl
+        {
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture, "http://{0}:{1}{2}", new object[] { this._server.HostName, this._server.Port, this._server.VirtualPath });
+            }
+        }
+        
 
         public static AvailabilityResult CheckPortAvailability(int port)
         {
@@ -65,8 +148,8 @@ namespace GitPrise.Core.Server
                 }
                 finally
                 {
-                    response.Close();    
-                }                
+                    response.Close();
+                }
             }
             catch (WebException ex)
             {
@@ -79,14 +162,6 @@ namespace GitPrise.Core.Server
             }
         }
 
-        public void Stop()
-        {
-            _server.StopServer();
-        }
-
-        public void Dispose()
-        {
-            _server.Dispose();
-        }
     }
+
 }

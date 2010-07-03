@@ -47,12 +47,12 @@ namespace GitPrise.Core.Tests.Server
             }
             var webAppPath = Path.Combine(dir.FullName, "GitPrise.Web");
 
-            using (var server = new GitPriseWebServer(KnownPort, webAppPath))
+            using (var server = new GitPriseWebServer())
             {
-                server.Start();
+                server.StartServer(webAppPath, KnownPort);
                 var result = GitPriseWebServer.CheckPortAvailability(KnownPort);
                 Assert.AreEqual(AvailabilityResult.InUseByGitPrise, result);
-                server.Stop();
+                server.StopServer();
             }
         }
     }
