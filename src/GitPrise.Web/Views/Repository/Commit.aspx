@@ -5,11 +5,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <table id="changeset" class="separate">
         <tbody>
-            <% foreach (var change in Model.CurrentCommit.Commit.Changes)
+            <% foreach (var change in Model.Changes)
                { %>
             <tr>
                 <td class="squash">
-                    <% switch (change.ChangeType)
+                    <% switch (change.Change.ChangeType)
                        {
                            case GitSharp.ChangeType.Added:
                     %>
@@ -48,8 +48,13 @@
                         <%: change.Path %>
                     </a>
                 </td>
-                <td class="squash">
-                    summary
+                <td class="squash stats">                    
+                    -
+                    <%: change.Summary.Deletes %>
+                    +
+                    <%: change.Summary.Inserts%>
+
+                    (= <%: change.Summary.Changes %>)
                 </td>
             </tr>
             <% } %>
@@ -62,8 +67,7 @@
             <div id="<%: change.Name %>" class="bar">
                 <%= Html.Image("file.txt.png", "", new { @class="ico" })%>
                 <%: change.Name%>
-                <a class="change-link" href="<%= Url.BlobUrl(change) %>">
-                    View file @
+                <a class="change-link" href="<%= Url.BlobUrl(change) %>">View file @
                     <%: change.Change.ComparedCommit.ShortHash%></a>
             </div>
             <% Html.RenderPartial("ChangeView", change); %>

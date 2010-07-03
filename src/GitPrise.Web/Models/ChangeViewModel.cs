@@ -18,6 +18,7 @@
 
 using System;
 using GitSharp;
+using System.Linq;
 
 namespace GitPrise.Web.Models
 {
@@ -26,6 +27,8 @@ namespace GitPrise.Web.Models
         public Change Change { get; private set; }
         public UnifiedDiffViewModel Diff { get; private set; }
         public string Name { get; private set; }
+        public SummaryViewModel Summary { get; private set; }
+
 
         public ChangeViewModel(RepositoryNavigationRequest request, Change change, Diff diff)
             : base(request)
@@ -35,6 +38,24 @@ namespace GitPrise.Web.Models
             Name = System.IO.Path.GetFileName(change.Path);
             Path = change.Path;
             Diff = new UnifiedDiffViewModel(diff);
+            Summary = new SummaryViewModel();
+            Summary.Inserts = Diff.Lines.Count(x => 
+                x.LineType == GitSharp.Diff.EditType.Inserted || 
+                (x.LineType == GitSharp.Diff.EditType.Replaced && x.LineB.HasValue) // new ones
+            );
+
+            Summary.Deletes = Diff.Lines.Count(x => 
+                x.LineType == GitSharp.Diff.EditType.Deleted || 
+                (x.LineType == GitSharp.Diff.EditType.Replaced && x.LineA.HasValue) // replaced with new one(s)
+            );
         }
+
+        public class SummaryViewModel
+        {
+            public int Inserts { get; internal set; }
+            public int Deletes { get; internal set; }
+            public int Changes { get { return Inserts + Deletes; } }
+        }
+
     }
 }

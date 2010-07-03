@@ -394,3 +394,9 @@ td.squash
 {
 	width: 1px;
 }
+
+td.stats
+{
+	white-space: nowrap;
+	text-align: right;
+}
