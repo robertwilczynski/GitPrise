@@ -20,6 +20,7 @@ using System;
 using GitSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GitPrise.Web.Models
 {
@@ -27,7 +28,7 @@ namespace GitPrise.Web.Models
     {
         public List<ChangeViewModel> Changes { get; private set; }
 
-        public CommitDetailsViewModel(Repository repository, RepositoryNavigationRequest request)
+        private CommitDetailsViewModel(Repository repository, RepositoryNavigationRequest request)
             : base(repository, request)
         {
             Changes = new List<ChangeViewModel>();
@@ -37,6 +38,20 @@ namespace GitPrise.Web.Models
             : this(repository, new RepositoryNavigationRequest(request) { Treeish = commit.Hash })
         {
             CurrentCommit = new CommitViewModel(repository, request, commit, true);
+
+            foreach (var change in commit.Changes)
+            {
+                // PASTE-START : borrowed from GitSharp.Demo
+                var a = (change.ReferenceObject != null ? (change.ReferenceObject as Blob).RawData : new byte[0]);
+                var b = (change.ComparedObject != null ? (change.ComparedObject as Blob).RawData : new byte[0]);
+
+                a = (Diff.IsBinary(a) == true ? Encoding.ASCII.GetBytes("Binary content\nFile size: " + a.Length) : a);
+                b = (Diff.IsBinary(b) == true ? Encoding.ASCII.GetBytes("Binary content\nFile size: " + b.Length) : b);
+                // PASTE-END : borrowed from GitSharp.Demo
+
+                var diff = new Diff(a, b);
+                Changes.Add(new ChangeViewModel(request, change, diff));
+            }
         }
     }
 }

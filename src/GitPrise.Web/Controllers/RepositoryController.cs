@@ -25,7 +25,6 @@ using GitPrise.Core.GitSharp;
 using GitPrise.Core.Services;
 using GitPrise.Core.SyntaxHighlighting;
 using GitPrise.Web.Mvc;
-using System.Text;
 
 namespace GitPrise.Web.Controllers
 {
@@ -102,21 +101,6 @@ namespace GitPrise.Web.Controllers
         {
             var commit = Repository.Get<Commit>(request.Treeish);
             var viewModel = new CommitDetailsViewModel(Repository, request, commit);
-
-            foreach (var change in commit.Changes)
-            {
-                // PASTE-START : borrowed from GitSharp.Demo
-                var a = (change.ReferenceObject != null ? (change.ReferenceObject as Blob).RawData : new byte[0]);
-                var b = (change.ComparedObject != null ? (change.ComparedObject as Blob).RawData : new byte[0]);
-
-                a = (Diff.IsBinary(a) == true ? Encoding.ASCII.GetBytes("Binary content\nFile size: " + a.Length) : a);
-                b = (Diff.IsBinary(b) == true ? Encoding.ASCII.GetBytes("Binary content\nFile size: " + b.Length) : b);
-                // PASTE-END : borrowed from GitSharp.Demo
-
-                var diff = new Diff(a, b);
-                viewModel.Changes.Add(new ChangeViewModel(request, change, diff));
-            }
-
             return View(viewModel);
         }
 
