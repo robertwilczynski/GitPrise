@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using GitSharp;
+using System.Linq;
 
 namespace GitPrise.Web.Models
 {
@@ -42,12 +43,6 @@ namespace GitPrise.Web.Models
         {
             foreach (var section in diff.Sections)
             {
-                Lines.Add(new LineViewModel(0, 0, 
-                    String.Format("{0} A => {1} {2} {3} B => {4} {5} {6}", 
-                        section.Status, 
-                        section.BeginA, section.EndA, section.EditWithRespectToA, 
-                        section.BeginB, section.EndB, section.EditWithRespectToB),
-                    LineType.Unchanged));
                 Lines.AddRange(new DiffSectionViewModel(section).Lines);
             }
         }
@@ -59,8 +54,48 @@ namespace GitPrise.Web.Models
         /// <returns></returns>
         public DiffViewModel GetCompactedDiff()
         {
-            var model = new DiffViewModel(this);
-            //model.Lines
+            var model = new DiffViewModel();
+            // number of unchanged lines around the change that should be kept.
+            const int unchangedWrappingLines = 3;
+            var lastLineAdded = -1;
+            var lines = new List<LineViewModel>();
+            // number of lines left to append when the changed section is left.
+            var postChangeWrapperLinesLeft = 0;
+            for (int i = 0; i < Lines.Count; i++)
+            {
+                // change found
+                var currentLine = Lines[i];
+                if (currentLine.LineType != LineType.Unchanged)
+                {
+                    // previous line was unchanged - adding wrapper
+                    if (i > 0 && Lines[i - 1].LineType == LineType.Unchanged)
+                    {
+                        // taking unchangedWrappingLines before first changed line
+                        var firstWrappingLine = Math.Max(0, i - unchangedWrappingLines);
+                        // making sure we don't grab a line we already added
+                        firstWrappingLine = Math.Max(lastLineAdded + 1, firstWrappingLine);
+                        for (int wrapperIndex = firstWrappingLine; wrapperIndex < i; wrapperIndex++)
+                        {
+                            lines.Add(Lines[wrapperIndex]);
+                        }
+                    }
+                    lines.Add(currentLine);
+                    lastLineAdded = i;
+                    // how many unchanged lines we want to append after we append all changed lines.
+                    postChangeWrapperLinesLeft = unchangedWrappingLines;
+                }
+                else
+                {
+                    if (postChangeWrapperLinesLeft > 0)
+                    {
+                        lines.Add(currentLine);
+                        postChangeWrapperLinesLeft -= 1;
+                        lastLineAdded = i;
+                    }
+                }
+            }
+
+            model.Lines.AddRange(lines);
             return model;
         }
 

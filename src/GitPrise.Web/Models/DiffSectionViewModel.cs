@@ -64,9 +64,6 @@ namespace GitPrise.Web.Models
                 ForEachLine(section.TextB, (idx, line) =>
                     AddLine(null, section.BeginB + idx, line, lineType));
             }
-
-
-            Lines.OrderBy(x => x.LineA);
         }
 
         private static LineType GetLineType(Diff.EditType editType)

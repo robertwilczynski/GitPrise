@@ -3,7 +3,7 @@
     <div class="file">
         <table class="code">
             <tbody>
-                <% foreach (var line in Model.Diff.Lines)
+                <% foreach (var line in Model.Diff.GetCompactedDiff().Lines)
                    {
                 %>
                 <tr>
