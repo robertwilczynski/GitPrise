@@ -119,12 +119,12 @@ namespace GitPrise.Web.Models
             var lines = new List<Line>();
 
             ForEachLine(section.TextA, (idx, line) =>
-                lines.Add(new Line(section.BeginA + idx, null, line, section.EditWithRespectToA)));
+                lines.Add(new Line(section.BeginA + idx, null, line, section.EditWithRespectToB)));
 
             if (section.EditWithRespectToA != Diff.EditType.Unchanged)
             {
                 ForEachLine(section.TextB, (idx, line) =>
-                    lines.Add(new Line(null, section.BeginB + idx, line, section.EditWithRespectToB)));
+                    lines.Add(new Line(null, section.BeginB + idx, line, section.EditWithRespectToA)));
             }
 
             return lines;
