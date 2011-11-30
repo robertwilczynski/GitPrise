@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D72727A0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitPrise.Core.Tests", "Tests\GitPrise.Core.Tests\GitPrise.Core.Tests.csproj", "{06FE6209-02D7-4C61-B556-B0527D489715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitPrise.Launcher", "GitPrise.Launcher\GitPrise.Launcher.csproj", "{E3831E06-7CEA-490C-817C-CD0A688BE98D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitPrise.Server", "GitPrise.Server\GitPrise.Server.csproj", "{85F8EE30-61B7-4A39-918F-FEE7B9A0CCE9}"
 EndProject
 Global
@@ -64,16 +62,6 @@ Global
 		{06FE6209-02D7-4C61-B556-B0527D489715}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{06FE6209-02D7-4C61-B556-B0527D489715}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{06FE6209-02D7-4C61-B556-B0527D489715}.Release|x86.ActiveCfg = Release|Any CPU
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Debug|x86.ActiveCfg = Debug|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Debug|x86.Build.0 = Debug|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Release|Any CPU.ActiveCfg = Release|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Release|Mixed Platforms.Build.0 = Release|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Release|x86.ActiveCfg = Release|x86
-		{E3831E06-7CEA-490C-817C-CD0A688BE98D}.Release|x86.Build.0 = Release|x86
 		{85F8EE30-61B7-4A39-918F-FEE7B9A0CCE9}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{85F8EE30-61B7-4A39-918F-FEE7B9A0CCE9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{85F8EE30-61B7-4A39-918F-FEE7B9A0CCE9}.Debug|Mixed Platforms.Build.0 = Debug|x86
