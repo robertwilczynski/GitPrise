@@ -64,9 +64,11 @@ namespace GitPrise.Launcher
 
             var processInfo = new ProcessStartInfo(vsWebServer)
             {
-                Arguments = arguments.ToString()
+                Arguments = arguments.ToString(),
+                UseShellExecute = false,
             };
             Process.Start(processInfo);
+            
 
             var browserProcessInfo = new ProcessStartInfo(
                 String.Format(@"http://localhost:{0}/repo?location={1}", port, Environment.CurrentDirectory));
